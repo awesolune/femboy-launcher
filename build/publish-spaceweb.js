@@ -190,11 +190,16 @@ async function publish(p, remote, { log = () => {}, verify = async () => {} } = 
     phase = 'public-check';
     await verify(p);
     phase = 'completion';
-    await recovery.guard(remote, o);
-    await remote.put(LOCK + '/complete.json', recovery.sealed({ id: o.id, owner: recovery.digest(o) }));
+    // HTTP verification can outlive the FTP session. Reconnect and recheck
+    // ownership before replaying this idempotent completion write.
+    await recovery.retry(remote, async () => {
+      await recovery.guard(remote, o);
+      await remote.put(LOCK + '/complete.json', recovery.sealed({ id: o.id, owner: recovery.digest(o) }));
+    });
     log(`SpaceWeb ${p.version}: published and verified; previous website preserved as ${backup}`);
     return { backup, id: p.id, preview: p.preview };
   } catch (error) {
+    log('SpaceWeb: stopped in phase ' + phase);
     if (moveAttempted) {
       try {
         await recovery.retry(remote, () => recovery.rollback(remote, o)); log('SpaceWeb: previous website restored');
