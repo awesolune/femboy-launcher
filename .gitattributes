@@ -3,3 +3,6 @@
 # Тексты лицензий сверяются по SHA-256 побайтно (build/license-supplements/manifest.json): всегда LF, иначе
 # checkout с core.autocrlf=true даёт CRLF и сборка останавливается на «License supplement text changed»
 build/license-supplements/** text eol=lf
+
+vendor/lazy-value/* text eol=lf
+vendor/*.tgz binary
