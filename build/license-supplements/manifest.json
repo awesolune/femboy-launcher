@@ -76,33 +76,6 @@
         }
       ],
       "evidence": "The license-only commit has npm gitHead a8009f9ce80ff5dbe71dd71e203afe4e4c878d28 as its parent; package.json/index.js/mappingTable.json byte-match. Unicode 8 transformation matches the installed data."
-    },
-    "lazy-val@1.0.5": {
-      "license": "MIT",
-      "reviewRequired": true,
-      "inputHashes": {
-        "package.json": "a5096f95098452cf6fe5c8ac9be8f13f59ab7c9f605ba5ef92c91b2c505744f0",
-        "out/main.js": "358fa8cba70c9140edafa85c0b7b25c7261939480186167e6b3440905f5b47da"
-      },
-      "notices": [
-        {
-          "file": "lazy-val-1.0.5-reference.txt",
-          "sha256": "ee576e5c1aad36ccae3c20ad0e3d0ca428fa7fcda9249bceafcd17c31331579e",
-          "kind": "unconfirmed-upstream-notice-canonical-reference"
-        }
-      ],
-      "provenance": [
-        {
-          "url": "https://github.com/develar/lazy-val/blob/b69ad4119f1b19bdab13c61ee2fcc88d46b89071/package.json",
-          "retrieved": "2026-11-11"
-        },
-        {
-          "url": "https://raw.githubusercontent.com/spdx/license-list-data/617f1a78824394ada7525017d98c6fb215aad09b/json/details/MIT.json",
-          "sha256": "3288d46f6e397df6c8859b675a5156cdd97016dbeb981b493bbb654859458c60",
-          "retrieved": "2026-11-11"
-        }
-      ],
-      "openIssue": "https://github.com/develar/lazy-val/issues/4"
     }
   }
 }

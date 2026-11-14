@@ -1,0 +1,15 @@
+{
+  "name": "@femboy-launcher/lazy-value",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Project-owned deferred value adapter for Electron tooling",
+  "main": "index.js",
+  "license": "GPL-3.0-only",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "LICENSE",
+    "README.md"
+  ],
+  "types": "index.d.ts"
+}

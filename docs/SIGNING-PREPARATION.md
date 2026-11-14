@@ -4,12 +4,12 @@
 
 The project is preparing for code signing. SignPath Foundation acceptance, a configured signing integration and a signed release have not been confirmed. The current public release must not be described as signed by SignPath.
 
-The GPL-3.0-only LICENSE and manual Windows unsigned build workflow are committed locally. A reviewed source revision and one successful hosted unsigned build are now available; the subsequent privacy-control changes still require their own reviewed build before distribution. The unsigned workflow does not submit a signing request or publish a release. Its provenance manifest identifies the source, run and file hashes; it is not a cryptographic signature or proof of SignPath origin verification.
+The GPL-3.0-only LICENSE and manual Windows unsigned build workflow are committed locally. A reviewed source revision and one successful hosted unsigned build are now available; the privacy-control revision also passed a hosted build; the subsequent local deferred-value replacement still requires its own reviewed build before distribution. The unsigned workflow does not submit a signing request or publish a release. Its provenance manifest identifies the source, run and file hashes; it is not a cryptographic signature or proof of SignPath origin verification.
 
 ## Prepared locally
 
 - Distribution notice hooks preserve project, font and dependency notices and check the packaged Windows payload. Exact supplement hashes protect the reviewed upstream texts.
-- checksum, tr46/Unicode and assert-plus notice preservation has been addressed. lazy-val 1.0.5 remains explicitly reviewRequired, so the notice inventory remains complete=false. Its canonical MIT reference is not presented as a recovered upstream copyright notice.
+- checksum, tr46/Unicode and assert-plus notice preservation has been addressed. The upstream lazy-val implementation has been replaced by the project-owned GPL-3.0-only adapter in vendor/lazy-value, installed through a pinned local archive and a global npm override. The historical import name remains for compatibility. No upstream notice is invented; missing dependency notices now fail generation. Verify the current generated inventory and packaged payload for each build.
 - RU/EN Setup and fresh-profile privacy choices, runtime controls, local policy files and first-run gating are implemented. Optional choices start off for fresh profiles. Existing valid profiles retain settings on normal launch and silent updates; an explicit interactive installation replaces the four corresponding settings.
 - The maintainer has confirmed clean installation, reinstall with retained data, silent upgrade behavior and automatic updating on Windows 11. This does not establish every all-users/ACL or negative TLS/checksum scenario.
 - The privacy draft and installer notices use the support bot and describe its consent, forwarding, local metadata, cleanup conditions and deletion limits. Provider references distinguish service documentation from verified policy pages.
@@ -18,7 +18,7 @@ The GPL-3.0-only LICENSE and manual Windows unsigned build workflow are committe
 
 ## Remaining gates
 
-1. Resolve the lazy-val copyright-notice review and final distribution obligations. Do not mark the notice inventory complete without evidence.
+1. Verify the local adapter, its pinned archive, the installed dependency tree and packaged payload. A complete notice inventory only describes notice coverage; final distribution obligations still require review.
 2. Finish the privacy/provider review and publish the policy for the reviewed release. The four optional-feature choices are not a global offline mode. Automatic modpack checks now share the mod-update choice. Passive avatars/previews use local data, and Microsoft skin/cape loading requires explicit actions; requested catalogs/login/downloads remain separate. Disclosure alone does not establish that SignPath's disable-option requirement is met.
 3. Maintain a reviewed public source revision, repeat the hosted build after source changes, and retain its exact workflow/run/artifact identity. The current unsigned workflow is preparation, not a signing pipeline.
 4. Confirm SignPath MFA, actual maintainer/approver roles, account access and Foundation acceptance. The maintainer is a proposed approver; no service-side configuration is inferred.
