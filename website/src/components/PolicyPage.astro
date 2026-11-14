@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+const { content, links = [], services = [] } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const english = Astro.url.pathname.startsWith(base + 'en/');
+---
+<Base title={content.title + ' — Femboy Launcher'} description={content.description}>
+  <Header />
+  <main id="main" class="section">
+    <article class="wrap policy-page">
+      <a href={base}>{english ? 'Back to home' : 'На главную'}</a>
+      <h1>{content.title}</h1>
+      <p class="policy-intro">{content.intro}</p>
+      <nav class="policy-toc" aria-label={english ? 'On this page' : 'На этой странице'}>
+        <ul>{content.sections.map(([id,title]) => <li><a href={'#' + id}>{title}</a></li>)}</ul>
+      </nav>
+      {content.sections.map(([id,title,paragraphs]) => <section aria-labelledby={id}>
+        <h2 id={id}>{title}</h2>
+        {paragraphs.map(text => <p>{text}</p>)}
+      </section>)}
+      {links.length > 0 && <section aria-labelledby="providers">
+        <h2 id="providers">{english ? 'Providers’ privacy policies' : 'Политики провайдеров'}</h2>
+        <p>{english ? 'Independent services control their own processing. These links do not extend the launcher’s promises to third-party services.' : 'Независимые сервисы сами определяют обработку данных. Эти ссылки не распространяют обещания лаунчера на сторонние сервисы.'}</p>
+        <ul>{links.map(([label,url]) => <li><a href={url} rel="noopener noreferrer">{label}</a></li>)}</ul>
+      </section>}
+      {services.length > 0 && <section aria-labelledby="services">
+        <h2 id="services">{english ? 'Other services and documentation' : 'Другие сервисы и документация'}</h2>
+        <p>{english ? 'The following are service or rules pages. A dedicated applicable privacy policy was not confirmed for every service; these links must not be read as verified privacy policies. Chosen mods, file hosts, servers and cloud providers may differ.' : 'Ниже — страницы сервисов или их правил. Отдельная применимая политика конфиденциальности подтверждена не для каждого сервиса; эти ссылки нельзя считать проверенными политиками. Выбранные моды, хосты файлов, серверы и облачные провайдеры могут отличаться.'}</p>
+        <ul>{services.map(([label,url]) => <li><a href={url} rel="noopener noreferrer">{label}</a></li>)}</ul>
+      </section>}
+      <p><a href="https://t.me/FemboyLauncherSupportBot" rel="noopener noreferrer">{english ? 'Contact project support' : 'Связаться с поддержкой проекта'}</a></p>
+      <p><a href={base + 'privacy/'}>{english ? 'Privacy policy' : 'Политика конфиденциальности'}</a> · <a href={base + 'code-signing/'}>Code signing policy</a></p>
+    </article>
+  </main>
+  <Footer />
+  <script src="../scripts/site.js"></script>
+</Base>
+<style>
+ .policy-page { max-width: 860px; overflow-wrap: anywhere; }
+ h1 { font-size: clamp(2rem, 4vw, 3.2rem); margin-block: 24px; }
+ .policy-intro { color: var(--muted); font-size: 1.08rem; }
+ .policy-toc { margin-block: 28px; padding: 20px 28px; border: 1px solid var(--stroke); border-radius: var(--r-md); background: var(--glass-strong); }
+ section { margin-block: 36px; }
+ h2 { font-size: 1.45rem; margin-bottom: 16px; scroll-margin-top: 100px; }
+ p { margin-block: 14px; line-height: 1.8; }
+ ul { padding-left: 24px; }
+ li { margin-block: 8px; }
+</style>

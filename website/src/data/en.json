@@ -397,5 +397,8 @@
   "Поддержка в Telegram": "Telegram support",
   "Написать в поддержку": "Contact support",
   "Отправь обращение в Telegram-бота поддержки. Шаблон поможет передать нужные подробности; можно приложить снимок ошибки без личных данных.": "Send a message to the Telegram support bot. Use the template to include the details we need; you can attach a screenshot with personal details removed.",
-  "Открыть бота поддержки": "Open the support bot"
+  "Открыть бота поддержки": "Open the support bot",
+  "Политика конфиденциальности": "Privacy policy",
+  "На этой странице": "On this page",
+  "Готовим заявку в SignPath Foundation. Публичная версия пока не подписана.": "We are preparing an application to SignPath Foundation. The public release is currently unsigned."
 }

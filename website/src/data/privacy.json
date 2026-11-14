@@ -1,0 +1,254 @@
+{
+  "privacy": {
+    "ru": {
+      "title": "Политика конфиденциальности",
+      "description": "Какие данные использует Femboy Launcher, куда обращается по сети и как управлять данными лаунчера, сайта и поддержки.",
+      "intro": "Обновлено 15 ноября 2026 года. Эта политика описывает лаунчер, сайт femboylauncher.ru и Telegram-бота поддержки проекта Femboy Launcher. Контакт сопровождающего проекта — @FemboyLauncherSupportBot.",
+      "sections": [
+        [
+          "scope",
+          "Версии и область действия",
+          [
+            "Сейчас публично доступна версия 0.10.2. Подготовленная новая сборка ещё не выпущена: она добавляет отдельный выбор четырёх фоновых функций при установке или первом запуске, общий переключатель проверок модов и модпаков, локальные аватары и загрузку профиля Microsoft по кнопке. Эти изменения нельзя считать уже установленными в скачанной версии 0.10.2.",
+            "В опубликованной версии часть запросов может выполняться автоматически, включая проверки модпаков и загрузку изображений аккаунтов или профиля Microsoft. Используй доступные переключатели в настройках, но не считай их общим запретом доступа к сети. Эта страница не меняет поведение ранее выпущенных файлов.",
+            "Minecraft, моды, игровые серверы, браузер, Windows и внешние облачные клиенты работают по собственным правилам. Политика проекта не гарантирует отсутствие сбора данных этими программами."
+          ]
+        ],
+        [
+          "local",
+          "Данные на компьютере",
+          [
+            "Лаунчер хранит настройки, имена и идентификаторы аккаунтов, данные сеансов входа, конфигурацию сборок, скины, загруженные файлы, локальную статистику игры, журналы и резервные копии. Путь фактически используемой папки виден в настройках; открыть её можно кнопкой «Открыть папку лаунчера». Portable обычно использует папку data рядом с EXE, но может сохранить прежний путь или выбрать запасной, если папка недоступна для записи.",
+            "Настройки и аккаунты находятся в launcher.json и резервном launcher.json.bak. Игровые миры и журналы модов могут содержать дополнительные личные данные. Не отправляй эти файлы целиком в поддержку или публичный чат.",
+            "Вход Microsoft выполняется через окно авторизации провайдера. При входе Ely.by введённые логин, пароль и при необходимости код второго фактора отправляются Ely.by; лаунчер сохраняет полученный токен, а не пароль Ely.by. Для части токенов используется Electron safeStorage при доступном шифровании операционной системы; предусмотрен незашифрованный запасной вариант. Нельзя считать весь файл настроек, API-ключи и все копии зашифрованными.",
+            "Статистика игры и изображения итогов создаются локально. Сохранение или копирование изображения само по себе не отправляет его в поддержку."
+          ]
+        ],
+        [
+          "network",
+          "Сетевые функции и управление",
+          [
+            "Каждый удалённый сервис получает обычные сведения о соединении, в том числе IP-адрес, запрошенный ресурс и заголовки запроса; некоторые запросы указывают название или версию лаунчера. Прокси и выбранное зеркало меняют маршрут и получателей соединения.",
+            "Обновления лаунчера: файлы и сведения о версии запрашиваются с downloads.femboylauncher.ru; старые или резервные каналы могут использовать Яндекс.Диск и GitHub. В подготовленной сборке фоновую проверку можно отключить в настройках; при включении проверки идут после запуска и примерно раз в два часа. Setup может загружать обновление и устанавливать при выходе, Portable сообщает о новой версии. Ручная проверка остаётся отдельным действием.",
+            "Проверки модов и модпаков обращаются к Modrinth и, для соответствующих сборок, CurseForge. Передаются идентификаторы проектов, версии игры и загрузчика, хеши файлов модов и настроенный ключ API CurseForge, когда он нужен. В подготовленной сборке общий выбор проверок модов и модпаков останавливает новые фоновые проверки; подсказки о готовности модов к новой версии Minecraft имеют отдельный переключатель. Уже отправленный запрос отменить задним числом нельзя. Проверка не устанавливает обновление сама.",
+            "Discord Rich Presence передаёт локальному клиенту Discord сведения об игре: название сборки, игру или загрузчик, время начала и иногда адрес сервера. Дальнейшая обработка зависит от Discord. Можно отключить показ игры в Discord или скрыть адрес сервера; скрытие адреса не скрывает остальные поля активности.",
+            "Вход, обновление сеанса и работа со скинами используют Microsoft/Xbox/Minecraft или Ely.by. Поиск скина по имени может обращаться к Mojang, затем Ely.by. Опубликованные сборки могут получать изображения аватаров через MCHeads и удалённые адреса скинов. В подготовленной сборке пассивный показ использует локальные изображения или инициалы, а загрузка скина и плащей Microsoft требует нажатия кнопки. Оффлайн-аккаунт не отключает прочие сетевые функции.",
+            "Каталоги, изображения, версии игры, Java, загрузчики и запрошенные файлы могут загружаться при открытии соответствующего интерфейса или использовании содержимого. Получатели: Mojang/Minecraft, Adoptium, Fabric, Quilt, Forge, NeoForge, Modrinth, CurseForge и хосты файлов или изображений выбранных проектов. При выборе зеркала часть загрузок идёт через BMCLAPI. Выбор официального источника меняет маршрут загрузок, но не отключает вход, каталоги и остальные сервисы.",
+            "Проверки сервера и соединения обращаются к проверяемым узлам. Подготовка локального диагностического ZIP также проверяет доступность настроенных сервисов: сохранение отчёта на диск не означает, что его создание обходится без сети. Проверка e4mc может обращаться к брокеру и выбранному ретранслятору. Открытие мира через e4mc позволяет другим игрокам подключаться через ретранслятор; используй эту функцию только для намеренного доступа к миру.",
+            "Синхронизация читает и записывает папку, выбранную тобой. Если её обслуживает внешний облачный клиент, он управляет отправкой файлов и сроками хранения по своим правилам. Отключение синхронизации в лаунчере не удаляет копии в облаке и не останавливает отдельную облачную программу."
+          ]
+        ],
+        [
+          "choices",
+          "Выбор в подготовленной сборке",
+          [
+            "В новой подготовленной сборке интерактивный Setup и первый запуск чистого профиля предлагают четыре независимых выбора: фоновые обновления лаунчера, проверки модов и модпаков, подсказки готовности модов и показ игры в Discord. Изначально все четыре выключены. Сохранённый выбор применяется до запуска фоновых функций.",
+            "Существующий корректный профиль сохраняет настройки при обычном запуске и тихом обновлении. Явный выбор при интерактивной установке заменяет четыре соответствующих значения. Остальные обращения — например, вход, открытие каталога и запуск игры — не отключаются этими четырьмя переключателями. В текущем публичном 0.10.2 не следует ожидать нового окна выбора."
+          ]
+        ],
+        [
+          "logs",
+          "Журналы и отправка",
+          [
+            "Журнал лаунчера лежит в папке logs используемого профиля и меняется при ротации по размеру; обычно сохраняются текущий launcher.log и два предыдущих файла. У игры и модов собственные журналы и сроки хранения. Автоматическое скрытие чувствительных строк не гарантирует удаление всех личных сведений.",
+            "Отправка журнала на mclo.gs — отдельное действие с подтверждением. Сервис получает выбранный журнал после локального скрытия части данных, сведения о соединении и обозначение источника. Любой, у кого есть итоговая ссылка, может прочитать журнал. Проверь содержимое перед отправкой; если не хочешь загружать его, откажись или не используй публикацию. По политике mclo.gs журналы хранятся до 90 дней после последнего обращения; дальнейшие условия определяет провайдер.",
+            "Экспорт мира, модпака или отчёта может включать содержимое выбранных файлов. Отправка экспорта, снимка экрана или сообщения раскрывает его получателю. Проект не гарантирует, что экспорт произвольного мода исключает все секреты."
+          ]
+        ],
+        [
+          "support-data",
+          "Поддержка через Telegram",
+          [
+            "Обращение к @FemboyLauncherSupportBot необязательно. После согласия в боте сообщения и снимки экрана пересылаются через Telegram в закрытую группу поддержки. Telegram получает данные общения по своей политике. Бот работает на SpaceWeb; его локальное состояние содержит идентификаторы чатов и сообщений, связи, категорию и статус обращения, а также отметки доставки, без хранения текста сообщений и фотографий в этом состоянии.",
+            "Неактивные связи и состояние обращений старше 30 дней, а также отметки доставки старше 7 дней очищаются при следующей обработке запроса ботом. Если запросов нет, они могут оставаться дольше. История Telegram, группа поддержки и внешние резервные копии имеют отдельное хранение.",
+            "Команда /privacy показывает сведения о данных, /stop останавливает пересылку, /delete удаляет локальные связи бота. Эти команды не удаляют историю сообщений Telegram. Не отправляй пароли, токены, API-ключи, launcher.json, архивы профиля и непроверенные журналы."
+          ]
+        ],
+        [
+          "website",
+          "Сайт и внешние ссылки",
+          [
+            "femboylauncher.ru — статический сайт на SpaceWeb. В текущем коде сайта нет собственных форм регистрации, рекламных или аналитических счётчиков. Браузер сохраняет выбранную тему в localStorage под ключом fl-site-theme; удалить её можно очисткой данных сайта. Шрифты, изображения и видео размещены вместе с сайтом.",
+            "Для выдачи страниц и файлов хостинг обрабатывает IP-адрес, время, адрес запроса, сведения о браузере и другие обычные параметры HTTP; они могут попадать в технические журналы для работы и защиты сайта. Сроки технического хранения зависят от настроек и правил хостинга; уточнить сведения или запросить удаление доступных проекту данных можно через поддержку. Здесь не обещается фиксированный срок удаления журналов провайдера.",
+            "Скачивание использует downloads.femboylauncher.ru на Yandex Object Storage; запасные ссылки ведут на Яндекс.Диск или GitHub. Соответствующий провайдер получает параметры соединения и файла. Ссылка на добровольную поддержку открывает ЮMoney: платёжные сведения обрабатывает платёжный сервис, а не форма сайта лаунчера. Переходы в Telegram, на сайты модов и другие внешние ресурсы регулируются их собственными политиками."
+          ]
+        ],
+        [
+          "deletion",
+          "Удаление и обращения",
+          [
+            "Чтобы убрать аккаунт из лаунчера, воспользуйся разделом аккаунтов. Удаляются текущая запись и кешированный скин; прежняя запись может остаться в launcher.json.bak, ручных копиях или облаке. Для Ely.by предпринимается попытка отозвать токен без подтверждения успеха; удаление Microsoft-аккаунта не обещает отзыв удалённого сеанса. Удалённые сеансы и аккаунты управляй у провайдера.",
+            "Для удаления оставшихся локальных данных сначала закрой игру и лаунчер, сохрани нужные миры и проверь путь через настройки. Удаление папки профиля удаляет также сборки, миры и настройки. Удаление программы через Windows сохраняет данные профиля. Копии в облаке, корзине, экспортах, резервных копиях и других программах удаляются отдельно; гарантии безопасного стирания нет.",
+            "С вопросами, исправлением или запросом удаления данных, доступных проекту, обращайся к @FemboyLauncherSupportBot. Укажи, о каких данных идёт речь, без отправки секретов. Проект может удалить только находящиеся под его контролем данные; по данным независимого сервиса обращайся также к нему.",
+            "Обновления этой политики публикуются по этому адресу с новой датой. Новые функции и способы обработки описываются отдельно; публикация страницы не означает изменение установленной у тебя версии."
+          ]
+        ]
+      ]
+    },
+    "en": {
+      "title": "Privacy policy",
+      "description": "Data used by Femboy Launcher, network services and controls for the launcher, website and support bot.",
+      "intro": "Updated 15 November 2026. This policy covers the launcher, femboylauncher.ru and the Femboy Launcher Telegram support bot. The project maintainer can be contacted through @FemboyLauncherSupportBot.",
+      "sections": [
+        [
+          "scope",
+          "Versions and scope",
+          [
+            "The current public release is 0.10.2. A prepared newer build has not been released: it adds four separate installation or first-run background-feature choices, shared mod and modpack check controls, local avatars and button-initiated Microsoft profile loading. Do not assume these changes are present in the public 0.10.2 download.",
+            "Some requests in the published version may run automatically, including modpack checks and account-image or Microsoft profile loading. Use the controls available in Settings, but do not treat them as a global network block. Publishing this page does not change previously released files.",
+            "Minecraft, mods, game servers, your browser, Windows and external cloud clients follow their own practices. This policy does not guarantee that those programs collect no data."
+          ]
+        ],
+        [
+          "local",
+          "Data on your computer",
+          [
+            "The launcher stores settings, account names and identifiers, sign-in session material, instance configuration, skins, downloaded files, local play statistics, logs and backups. Settings shows the directory actually in use; use “Open launcher folder” to find it. Portable normally uses data beside the executable, but can retain an earlier location or fall back if the directory is not writable.",
+            "Settings and account records are in launcher.json and its backup launcher.json.bak. Game worlds and mod logs may contain additional personal data. Do not send these entire files to support or public chats.",
+            "Microsoft sign-in uses the provider’s authentication window. Ely.by sign-in sends the entered username, password and, when required, second-factor code to Ely.by; the launcher retains the resulting token rather than the Ely.by password. Some token material uses Electron safeStorage when operating-system encryption is available; there is an unencrypted fallback. The entire settings file, API keys and all backups are not covered by a blanket encryption claim.",
+            "Play statistics and recap images are produced locally. Saving or copying an image does not itself send it to support."
+          ]
+        ],
+        [
+          "network",
+          "Network features and controls",
+          [
+            "Each remote service receives ordinary connection information, including the source IP address, requested resource and request headers; some requests identify the launcher or version. A proxy or selected mirror changes the route and connection recipients.",
+            "Launcher updates request version information and files from downloads.femboylauncher.ru; legacy or reserve channels can use Yandex Disk and GitHub. In the prepared build, background checks can be disabled in Settings; when enabled, checks occur after startup and approximately every two hours. Setup can download and install an update on exit; Portable reports availability. Manual checking remains a separate action.",
+            "Mod and modpack checks contact Modrinth and, for applicable instances, CurseForge. Requests can include project identifiers, game and loader versions, mod-file hashes and a configured CurseForge API key when required. In the prepared build, the shared mod/modpack choice stops new background checks; readiness hints for a new Minecraft version have a separate switch. Already-sent requests cannot be undone. Checking does not install an update itself.",
+            "Discord Rich Presence sends activity to the local Discord client: instance name, game or loader, start time and sometimes server address. Discord controls subsequent processing. Disable game activity in Discord or hide the server address in Settings; hiding the address does not hide the other activity fields.",
+            "Sign-in, session refresh and skins use Microsoft/Xbox/Minecraft or Ely.by. Skin lookup by name can query Mojang and then Ely.by. Published builds can retrieve account images through MCHeads and remote skin addresses. In the prepared build, passive rendering uses local images or initials, and Microsoft skin/cape loading requires a button click. An offline account does not disable other networking.",
+            "Catalogs, images, game versions, Java, loaders and requested content can be fetched when the relevant interface opens or content is used. Recipients include Mojang/Minecraft, Adoptium, Fabric, Quilt, Forge, NeoForge, Modrinth, CurseForge and the file/image hosts chosen by content projects. The mirror setting routes some downloads through BMCLAPI. Choosing official sources changes download routing but does not disable authentication, catalogs or other services.",
+            "Server and connection checks contact the endpoints being tested. Preparing a local diagnostic ZIP also checks configured service endpoints: saving a report locally does not make its preparation network-free. An e4mc check can contact its broker and selected relay. Opening a world through e4mc lets other players connect through a relay; use it only when intending to share the world.",
+            "Synchronization reads and writes a folder you select. If an external cloud client manages it, that client controls uploads and retention under its own rules. Turning off launcher synchronization neither deletes cloud copies nor stops an independent cloud application."
+          ]
+        ],
+        [
+          "choices",
+          "Choices in the prepared build",
+          [
+            "In the prepared newer build, interactive Setup and first launch of a fresh profile offer four independent choices: background launcher updates, mod/modpack checks, mod readiness hints and Discord activity. All four start off. The recorded choice is applied before optional background services begin.",
+            "A valid existing profile retains settings on normal startup and silent updates. An explicit interactive-installation choice replaces the four matching values. Other requests, such as sign-in, opening catalogs and launching the game, are not disabled by these four switches. Do not expect the new choice window in the current public 0.10.2 release."
+          ]
+        ],
+        [
+          "logs",
+          "Logs and sharing",
+          [
+            "Launcher logs are stored in the profile’s logs folder and rotate by size; normally there is a current launcher.log and two earlier files. Games and mods have their own logs and retention. Automatic redaction does not guarantee removal of every personal detail.",
+            "Uploading a log to mclo.gs is a separate action requiring confirmation. The provider receives the selected log after local redaction, connection information and a source label. Anyone with the resulting link can read the log. Review it before sharing; decline or do not use the upload feature to avoid uploading. The mclo.gs policy states that logs are stored for up to 90 days after their last access; the provider governs further processing.",
+            "World, modpack or diagnostic exports can include selected file contents. Sending an export, screenshot or message discloses it to the recipient. The project does not guarantee that exports exclude every secret stored by an arbitrary mod."
+          ]
+        ],
+        [
+          "support-data",
+          "Telegram support",
+          [
+            "Using @FemboyLauncherSupportBot is optional. After consent in the bot, messages and screenshots are forwarded through Telegram to a private support group. Telegram processes conversations under its own policy. The bot is hosted on SpaceWeb; its local state holds chat/message identifiers, links, ticket category/status and delivery receipts, without storing message text or photographs in that state.",
+            "Inactive links and ticket state older than 30 days, and delivery receipts older than 7 days, are removed the next time the bot processes a request. Without requests they can remain longer. Telegram history, the support group and external backups have separate retention.",
+            "/privacy shows processing details, /stop stops forwarding, and /delete removes the bot’s local links. These commands do not delete Telegram message history. Never send passwords, tokens, API keys, launcher.json, profile archives or unreviewed logs."
+          ]
+        ],
+        [
+          "website",
+          "Website and external links",
+          [
+            "femboylauncher.ru is a static website hosted on SpaceWeb. Its current code includes no project-operated registration forms, advertising or analytics trackers. Your browser stores the selected theme in localStorage as fl-site-theme; clear site data to remove it. Fonts, images and video are hosted with the site.",
+            "To serve pages and files, the host processes IP addresses, times, requested addresses, browser information and other ordinary HTTP parameters; technical logs may retain them to operate and protect the site. Technical retention depends on hosting settings and provider rules; contact support for details or to request deletion of data available to the project. No fixed provider-log deletion deadline is promised here.",
+            "Downloads use downloads.femboylauncher.ru on Yandex Object Storage; reserve links use Yandex Disk or GitHub. The relevant provider receives connection and file-request details. Voluntary donation links open YooMoney, which processes payment information rather than a launcher-site form. Telegram, mod sites and other external destinations follow their own policies."
+          ]
+        ],
+        [
+          "deletion",
+          "Deletion and requests",
+          [
+            "Use Accounts to remove an account from the launcher. This removes the current record and cached skin; old records can remain in launcher.json.bak, manual backups or cloud storage. Ely.by token invalidation is attempted without confirmation of success; removing Microsoft credentials does not promise to revoke the remote session. Manage remote sessions and accounts with the provider.",
+            "To remove remaining local data, close the game and launcher, preserve worlds you need and check the actual path in Settings first. Deleting a profile folder also deletes instances, worlds and settings. The Windows uninstaller retains profile data. Cloud copies, trash, exports, backups and other programs must be handled separately; secure erasure is not guaranteed.",
+            "For questions, corrections or deletion of data available to the project, contact @FemboyLauncherSupportBot. Identify the data concerned without sending secrets. The project can delete only data it controls; also contact independent providers about data they hold.",
+            "Updates to this policy are published at this address with a new date. New features and processing changes are described separately; a website update does not change the version installed on your computer."
+          ]
+        ]
+      ]
+    }
+  },
+  "links": [
+    [
+      "Microsoft / Xbox / Minecraft",
+      "https://www.microsoft.com/en-us/privacy/privacystatement"
+    ],
+    [
+      "Modrinth",
+      "https://modrinth.com/legal/privacy"
+    ],
+    [
+      "CurseForge / Overwolf",
+      "https://legal.overwolf.com/docs/overwolf/platform/platform-privacy-policy/"
+    ],
+    [
+      "Discord",
+      "https://discord.com/privacy"
+    ],
+    [
+      "Yandex",
+      "https://yandex.com/legal/confidential/en/"
+    ],
+    [
+      "GitHub",
+      "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+    ],
+    [
+      "Adoptium / Eclipse",
+      "https://www.eclipse.org/legal/privacy/"
+    ],
+    [
+      "mclo.gs / Aternos",
+      "https://aternos.gmbh/en/mclogs/privacy"
+    ],
+    [
+      "Telegram",
+      "https://telegram.org/privacy"
+    ],
+    [
+      "YooMoney",
+      "https://yoomoney.ru/document/politika-konfidencialnosti-ooo-nko-yoomoney"
+    ]
+  ],
+  "services": [
+    [
+      "Ely.by",
+      "https://account.ely.by/rules"
+    ],
+    [
+      "Fabric",
+      "https://fabricmc.net/"
+    ],
+    [
+      "Quilt",
+      "https://quiltmc.org/en/"
+    ],
+    [
+      "Forge",
+      "https://files.minecraftforge.net/"
+    ],
+    [
+      "NeoForge",
+      "https://neoforged.net/"
+    ],
+    [
+      "BMCLAPI",
+      "https://bmclapidoc.bangbang93.com/"
+    ],
+    [
+      "e4mc",
+      "https://e4mc.link/"
+    ],
+    [
+      "MCHeads",
+      "https://mcheads.net/"
+    ],
+    [
+      "SpaceWeb",
+      "https://sweb.ru/"
+    ]
+  ]
+}
