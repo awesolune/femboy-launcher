@@ -49,3 +49,7 @@ Fresh Portable and clean installed profiles without a recorded installer choice 
 ## Notice review update — 11 November 2026
 
 Notice preservation now resolves checksum 0.1.1 using its exact upstream copyright header plus explicitly identified canonical MIT terms, and tr46 0.0.3 using the upstream license-only commit immediately following its npm gitHead. Unicode 8.0 data attribution and the official Unicode License V3 are also preserved. Exact package/source and notice hashes guard these supplements. Only lazy-val 1.0.5 remains reviewRequired; its canonical reference is not represented as an author-supplied copyright notice. NOTICE-INVENTORY.json remains complete=false. This is preservation work, not legal approval.
+
+## Public policy update — 15 November 2026
+
+Current public policy: https://femboylauncher.ru/en/privacy/ ; signing policy: https://femboylauncher.ru/en/code-signing/ . The upstream lazy-val implementation was replaced in revision 3806188d1c7055341fa87b02eb5c4e990986a838 by a project-owned GPL-3.0-only adapter. Notice generation now reports complete=true with no pending entries and rejects missing notices. Hosted build 43628525970 passed 976 Node and 976 Electron Node tests plus unsigned packaging. Earlier lazy-val review notes above are historical. Complete notice coverage is not general legal clearance or Foundation acceptance. The public release remains unsigned 0.10.2; the application has not been submitted.

@@ -1,0 +1,94 @@
+{
+  "ru": {
+    "title": "Code signing policy",
+    "description": "Текущий статус цифровой подписи Femboy Launcher и подготовка заявки в SignPath Foundation.",
+    "intro": "Обновлено 15 ноября 2026 года. Публичный выпуск 0.10.2 пока не имеет цифровой подписи. Мы готовим заявку в бесплатную программу SignPath Foundation; заявка ещё не отправлена, одобрение и сертификат не получены.",
+    "sections": [
+      [
+        "status",
+        "Текущий статус",
+        [
+          "Подпись через SignPath.io с сертификатом SignPath Foundation планируется только после принятия проекта. Сейчас проект не заявляет, что SignPath подписывает его файлы. Окончательное решение об участии принимает Foundation.",
+          "Успешная проверочная сборка на GitHub подтверждает прохождение этапов сборки и тестов, но сама по себе не является подписью или одобрением Foundation. Тестовые файлы не заменяют опубликованные файлы 0.10.2."
+        ]
+      ],
+      [
+        "roles",
+        "Ответственные",
+        [
+          "Исходный код и сопровождение: https://github.com/awesolune/femboy-launcher. Сопровождающий, автор и проверяющий изменения — awesolune (https://github.com/awesolune). Предлагаемый ответственный за ручное подтверждение будущих запросов подписи — тот же сопровождающий. Роли в SignPath ещё не настроены.",
+          "Сопровождающий подтвердил включённую двухфакторную защиту GitHub. Для доступа к SignPath также потребуется двухфакторная защита; её настройка пока не подтверждена."
+        ]
+      ],
+      [
+        "process",
+        "Порядок будущей подписи",
+        [
+          "Планируем подписывать только собственные артефакты проекта, собранные из проверенной публичной ревизии, с проверкой происхождения, ограничениями имени продукта и версии, отметкой времени и ручным подтверждением каждого выпуска. Сторонние готовые программы и библиотеки не должны переподписываться сертификатом проекта. Точная схема вложенной подписи зависит от поддерживаемой интеграции сервиса.",
+          "После подписи необходимо проверить подписи и отметки времени, рассчитать размеры и хеши окончательных файлов, подготовить из них данные обновления и проверить переход установленной версии. Неподписанный проверочный EXE нельзя выдавать за окончательный подписанный выпуск.",
+          "Подпись не гарантирует немедленного исчезновения предупреждений Windows SmartScreen: репутация файла и издателя оценивается отдельно."
+        ]
+      ],
+      [
+        "privacy",
+        "Конфиденциальность",
+        [
+          "Политика конфиденциальности описывает данные на компьютере, сетевые сервисы, необязательные фоновые функции, поддержку, сайт и удаление данных. Ссылка находится ниже. Отключение отдельных фоновых функций не является общим режимом без сети."
+        ]
+      ],
+      [
+        "references",
+        "Официальные ссылки",
+        [
+          "Программа: https://signpath.org/ ; условия: https://signpath.org/terms ; сервис подписи: https://signpath.io/ . Публичные файлы проекта: https://github.com/awesolune/femboy-launcher/releases . Эта страница будет обновлена после изменения фактического статуса заявки или подписи."
+        ]
+      ]
+    ]
+  },
+  "en": {
+    "title": "Code signing policy",
+    "description": "Femboy Launcher code-signing status and preparation for the SignPath Foundation program.",
+    "intro": "Updated 15 November 2026. The public 0.10.2 release is currently unsigned. We are preparing an application to the free SignPath Foundation program; it has not yet been submitted, accepted or granted a certificate.",
+    "sections": [
+      [
+        "status",
+        "Current status",
+        [
+          "Signing through SignPath.io using a SignPath Foundation certificate is planned only if the project is accepted. We do not currently claim that SignPath signs our files. The Foundation makes the final acceptance decision.",
+          "A successful GitHub preparation build confirms completion of build and test steps; it is not a signature or Foundation approval. Preparation artifacts do not replace the published 0.10.2 files."
+        ]
+      ],
+      [
+        "roles",
+        "Team responsibilities",
+        [
+          "Source and maintenance: https://github.com/awesolune/femboy-launcher. Maintainer, author and reviewer: awesolune (https://github.com/awesolune). The same maintainer is the proposed manual approver for future signing requests. SignPath roles have not yet been configured.",
+          "The maintainer has confirmed GitHub multi-factor authentication. SignPath access also requires multi-factor authentication; its configuration has not yet been confirmed."
+        ]
+      ],
+      [
+        "process",
+        "Planned signing process",
+        [
+          "We plan to sign only the project’s own artifacts built from a reviewed public revision, with verified origin, product-name and version restrictions, timestamps and manual approval for every release. Upstream prebuilt programs and libraries must not be re-signed with the project’s certificate. The exact nested-signing sequence depends on the service’s supported integration.",
+          "After signing, signatures and timestamps must be verified, final file sizes and hashes calculated, update metadata generated from those final bytes and the installed-version transition tested. An unsigned preparation executable must not be presented as a final signed release.",
+          "A signature does not guarantee immediate removal of Windows SmartScreen warnings; file and publisher reputation are assessed separately."
+        ]
+      ],
+      [
+        "privacy",
+        "Privacy",
+        [
+          "The privacy policy covers local data, network services, optional background features, support, the website and deletion. It is linked below. Turning off individual background features is not a global offline mode."
+        ]
+      ],
+      [
+        "references",
+        "Official references",
+        [
+          "Program: https://signpath.org/ ; conditions: https://signpath.org/terms ; signing service: https://signpath.io/ . Public project downloads: https://github.com/awesolune/femboy-launcher/releases . This page will be updated when the actual application or signing status changes."
+        ]
+      ]
+    ]
+  }
+}

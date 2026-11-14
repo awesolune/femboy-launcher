@@ -22,6 +22,7 @@ const releaseId = (v: string) => `release-${v.replace(/\./g, '-')}`;
         <p>Как меняется лаунчер: новые возможности, улучшения и исправления из записей «Что нового».</p>
         <a class="btn btn-primary" href={`${base}#download`}><Icon name="download" />Скачать {version || 'лаунчер'}</a>
       </div>
+      <p class="note"><a href={`${base}code-signing/`}>Code signing policy</a> · <a href={`${base}privacy/`}>Политика конфиденциальности</a></p>
       <div class="releases-layout">
         <nav class="release-nav" aria-label="Быстрый переход к версии">
           <h2>Все версии</h2>
