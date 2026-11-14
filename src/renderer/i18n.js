@@ -703,6 +703,8 @@
 
   // 0.8.0: отчёт для поддержки и лог на mclo.gs
   Object.assign(D, {
+    'Поддержка в Telegram': 'Telegram support',
+    'Вопросы, ошибки и предложения — через Telegram-бота поддержки.': 'For questions, bugs and suggestions, use the Telegram support bot.',
     'Отчёт для поддержки': 'Support report', 'Собрать отчёт': 'Build a report', 'Поделиться': 'Share', 'Поделиться логом': 'Share the log',
     'Если что-то не работает и ты просишь помощи: одна кнопка собирает ZIP с версиями, железом, Java, проверкой связи, логами и списком модов выбранной сборки. Паролей и токенов в нём нет, имя пользователя Windows и адреса серверов убраны. Файл остаётся у тебя: сам решай, кому его показать.':
       'If something doesn’t work and you’re asking for help: one button builds a ZIP with versions, hardware, Java, the connection check, logs and the mod list of the selected instance. There are no passwords or tokens in it, and the Windows user name and server addresses are removed. The file stays with you: you decide who to show it to.',
