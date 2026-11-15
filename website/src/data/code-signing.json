@@ -1,14 +1,14 @@
 {
   "ru": {
     "title": "Code signing policy",
-    "description": "Текущий статус цифровой подписи Femboy Launcher и подготовка заявки в SignPath Foundation.",
-    "intro": "Обновлено 15 ноября 2026 года. Публичный выпуск 0.10.2 пока не имеет цифровой подписи. Мы готовим заявку в бесплатную программу SignPath Foundation; заявка ещё не отправлена, одобрение и сертификат не получены.",
+    "description": "Текущий статус цифровой подписи Femboy Launcher.",
+    "intro": "Обновлено 15 ноября 2026 года. Публичный выпуск 0.10.2 не имеет цифровой подписи. SignPath Foundation отказал в бесплатной подписи из-за недостаточной публичной известности и проверяемой репутации проекта. Рассмотрение этой заявки завершено; одобрения, сертификата и интеграции нет.",
     "sections": [
       [
         "status",
         "Текущий статус",
         [
-          "Подпись через SignPath.io с сертификатом SignPath Foundation планируется только после принятия проекта. Сейчас проект не заявляет, что SignPath подписывает его файлы. Окончательное решение об участии принимает Foundation.",
+          "Отказ не является претензией к качеству проекта. Foundation предложил повторно подать заявку после роста публичной известности или воспользоваться платной подпиской. Ни один из этих вариантов пока не выбран; подпись не обещана.",
           "Успешная проверочная сборка на GitHub подтверждает прохождение этапов сборки и тестов, но сама по себе не является подписью или одобрением Foundation. Тестовые файлы не заменяют опубликованные файлы 0.10.2."
         ]
       ],
@@ -47,14 +47,14 @@
   },
   "en": {
     "title": "Code signing policy",
-    "description": "Femboy Launcher code-signing status and preparation for the SignPath Foundation program.",
-    "intro": "Updated 15 November 2026. The public 0.10.2 release is currently unsigned. We are preparing an application to the free SignPath Foundation program; it has not yet been submitted, accepted or granted a certificate.",
+    "description": "Current code-signing status of Femboy Launcher.",
+    "intro": "Updated November 15, 2026. Public release 0.10.2 is unsigned. SignPath Foundation declined free signing because the project does not yet have sufficient public visibility and verifiable reputation. This application is no longer pending; no approval, certificate or integration is in place.",
     "sections": [
       [
         "status",
         "Current status",
         [
-          "Signing through SignPath.io using a SignPath Foundation certificate is planned only if the project is accepted. We do not currently claim that SignPath signs our files. The Foundation makes the final acceptance decision.",
+          "The refusal is not a criticism of the project’s quality. The Foundation suggested reapplying after public visibility grows or using a paid subscription. Neither option has been selected, and signing is not promised.",
           "A successful GitHub preparation build confirms completion of build and test steps; it is not a signature or Foundation approval. Preparation artifacts do not replace the published 0.10.2 files."
         ]
       ],
