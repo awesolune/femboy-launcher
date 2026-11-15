@@ -9,8 +9,8 @@
           "scope",
           "Версии и область действия",
           [
-            "Сейчас публично доступна версия 0.10.2. Подготовленная новая сборка ещё не выпущена: она добавляет отдельный выбор четырёх фоновых функций при установке или первом запуске, общий переключатель проверок модов и модпаков, локальные аватары и загрузку профиля Microsoft по кнопке. Эти изменения нельзя считать уже установленными в скачанной версии 0.10.2.",
-            "В опубликованной версии часть запросов может выполняться автоматически, включая проверки модпаков и загрузку изображений аккаунтов или профиля Microsoft. Используй доступные переключатели в настройках, но не считай их общим запретом доступа к сети. Эта страница не меняет поведение ранее выпущенных файлов.",
+            "Сейчас публично доступна версия 0.11.0. Она включает отдельный выбор четырёх фоновых функций при установке или первом запуске, общий переключатель проверок модов и модпаков, локальные аватары и загрузку профиля Microsoft по кнопке. Эти изменения не применяются задним числом к версии 0.10.2 и более старым файлам.",
+            "В версии 0.10.2 и более старых часть запросов может выполняться автоматически, включая проверки модпаков и загрузку изображений аккаунтов или профиля Microsoft. Используй доступные переключатели в настройках, но не считай их общим запретом доступа к сети. Эта страница не меняет поведение ранее выпущенных файлов.",
             "Minecraft, моды, игровые серверы, браузер, Windows и внешние облачные клиенты работают по собственным правилам. Политика проекта не гарантирует отсутствие сбора данных этими программами."
           ]
         ],
@@ -29,10 +29,10 @@
           "Сетевые функции и управление",
           [
             "Каждый удалённый сервис получает обычные сведения о соединении, в том числе IP-адрес, запрошенный ресурс и заголовки запроса; некоторые запросы указывают название или версию лаунчера. Прокси и выбранное зеркало меняют маршрут и получателей соединения.",
-            "Обновления лаунчера: файлы и сведения о версии запрашиваются с downloads.femboylauncher.ru; старые или резервные каналы могут использовать Яндекс.Диск и GitHub. В подготовленной сборке фоновую проверку можно отключить в настройках; при включении проверки идут после запуска и примерно раз в два часа. Setup может загружать обновление и устанавливать при выходе, Portable сообщает о новой версии. Ручная проверка остаётся отдельным действием.",
-            "Проверки модов и модпаков обращаются к Modrinth и, для соответствующих сборок, CurseForge. Передаются идентификаторы проектов, версии игры и загрузчика, хеши файлов модов и настроенный ключ API CurseForge, когда он нужен. В подготовленной сборке общий выбор проверок модов и модпаков останавливает новые фоновые проверки; подсказки о готовности модов к новой версии Minecraft имеют отдельный переключатель. Уже отправленный запрос отменить задним числом нельзя. Проверка не устанавливает обновление сама.",
+            "Обновления лаунчера: файлы и сведения о версии запрашиваются с downloads.femboylauncher.ru; старые или резервные каналы могут использовать Яндекс.Диск и GitHub. В версии 0.11.0 фоновую проверку можно отключить в настройках; при включении проверки идут после запуска и примерно раз в два часа. Setup может загружать обновление и устанавливать при выходе, Portable сообщает о новой версии. Ручная проверка остаётся отдельным действием.",
+            "Проверки модов и модпаков обращаются к Modrinth и, для соответствующих сборок, CurseForge. Передаются идентификаторы проектов, версии игры и загрузчика, хеши файлов модов и настроенный ключ API CurseForge, когда он нужен. В версии 0.11.0 общий выбор проверок модов и модпаков останавливает новые фоновые проверки; подсказки о готовности модов к новой версии Minecraft имеют отдельный переключатель. Уже отправленный запрос отменить задним числом нельзя. Проверка не устанавливает обновление сама.",
             "Discord Rich Presence передаёт локальному клиенту Discord сведения об игре: название сборки, игру или загрузчик, время начала и иногда адрес сервера. Дальнейшая обработка зависит от Discord. Можно отключить показ игры в Discord или скрыть адрес сервера; скрытие адреса не скрывает остальные поля активности.",
-            "Вход, обновление сеанса и работа со скинами используют Microsoft/Xbox/Minecraft или Ely.by. Поиск скина по имени может обращаться к Mojang, затем Ely.by. Опубликованные сборки могут получать изображения аватаров через MCHeads и удалённые адреса скинов. В подготовленной сборке пассивный показ использует локальные изображения или инициалы, а загрузка скина и плащей Microsoft требует нажатия кнопки. Оффлайн-аккаунт не отключает прочие сетевые функции.",
+            "Вход, обновление сеанса и работа со скинами используют Microsoft/Xbox/Minecraft или Ely.by. Поиск скина по имени может обращаться к Mojang, затем Ely.by. Версия 0.10.2 и более старые сборки могут получать изображения аватаров через MCHeads и удалённые адреса скинов. В версии 0.11.0 пассивный показ использует локальные изображения или инициалы, а загрузка скина и плащей Microsoft требует нажатия кнопки. Оффлайн-аккаунт не отключает прочие сетевые функции.",
             "Каталоги, изображения, версии игры, Java, загрузчики и запрошенные файлы могут загружаться при открытии соответствующего интерфейса или использовании содержимого. Получатели: Mojang/Minecraft, Adoptium, Fabric, Quilt, Forge, NeoForge, Modrinth, CurseForge и хосты файлов или изображений выбранных проектов. При выборе зеркала часть загрузок идёт через BMCLAPI. Выбор официального источника меняет маршрут загрузок, но не отключает вход, каталоги и остальные сервисы.",
             "Проверки сервера и соединения обращаются к проверяемым узлам. Подготовка локального диагностического ZIP также проверяет доступность настроенных сервисов: сохранение отчёта на диск не означает, что его создание обходится без сети. Проверка e4mc может обращаться к брокеру и выбранному ретранслятору. Открытие мира через e4mc позволяет другим игрокам подключаться через ретранслятор; используй эту функцию только для намеренного доступа к миру.",
             "Синхронизация читает и записывает папку, выбранную тобой. Если её обслуживает внешний облачный клиент, он управляет отправкой файлов и сроками хранения по своим правилам. Отключение синхронизации в лаунчере не удаляет копии в облаке и не останавливает отдельную облачную программу."
@@ -40,10 +40,10 @@
         ],
         [
           "choices",
-          "Выбор в подготовленной сборке",
+          "Выбор в версии 0.11.0",
           [
             "В новой подготовленной сборке интерактивный Setup и первый запуск чистого профиля предлагают четыре независимых выбора: фоновые обновления лаунчера, проверки модов и модпаков, подсказки готовности модов и показ игры в Discord. Изначально все четыре выключены. Сохранённый выбор применяется до запуска фоновых функций.",
-            "Существующий корректный профиль сохраняет настройки при обычном запуске и тихом обновлении. Явный выбор при интерактивной установке заменяет четыре соответствующих значения. Остальные обращения — например, вход, открытие каталога и запуск игры — не отключаются этими четырьмя переключателями. В текущем публичном 0.10.2 не следует ожидать нового окна выбора."
+            "Существующий корректный профиль сохраняет настройки при обычном запуске и тихом обновлении. Явный выбор при интерактивной установке заменяет четыре соответствующих значения. Остальные обращения — например, вход, открытие каталога и запуск игры — не отключаются этими четырьмя переключателями. В версии 0.10.2 и более старых нет нового окна выбора."
           ]
         ],
         [
@@ -94,8 +94,8 @@
           "scope",
           "Versions and scope",
           [
-            "The current public release is 0.10.2. A prepared newer build has not been released: it adds four separate installation or first-run background-feature choices, shared mod and modpack check controls, local avatars and button-initiated Microsoft profile loading. Do not assume these changes are present in the public 0.10.2 download.",
-            "Some requests in the published version may run automatically, including modpack checks and account-image or Microsoft profile loading. Use the controls available in Settings, but do not treat them as a global network block. Publishing this page does not change previously released files.",
+            "The current public release is 0.11.0. It includes four separate installation or first-run background-feature choices, shared mod and modpack check controls, local avatars and button-initiated Microsoft profile loading. These changes do not apply retroactively to version 0.10.2 or earlier files.",
+            "In version 0.10.2 and earlier, some requests can run automatically, including modpack checks and account-image or Microsoft profile loading. Use the available settings, but do not treat them as a global network-access ban. This page does not change previously released files.",
             "Minecraft, mods, game servers, your browser, Windows and external cloud clients follow their own practices. This policy does not guarantee that those programs collect no data."
           ]
         ],
@@ -114,10 +114,10 @@
           "Network features and controls",
           [
             "Each remote service receives ordinary connection information, including the source IP address, requested resource and request headers; some requests identify the launcher or version. A proxy or selected mirror changes the route and connection recipients.",
-            "Launcher updates request version information and files from downloads.femboylauncher.ru; legacy or reserve channels can use Yandex Disk and GitHub. In the prepared build, background checks can be disabled in Settings; when enabled, checks occur after startup and approximately every two hours. Setup can download and install an update on exit; Portable reports availability. Manual checking remains a separate action.",
-            "Mod and modpack checks contact Modrinth and, for applicable instances, CurseForge. Requests can include project identifiers, game and loader versions, mod-file hashes and a configured CurseForge API key when required. In the prepared build, the shared mod/modpack choice stops new background checks; readiness hints for a new Minecraft version have a separate switch. Already-sent requests cannot be undone. Checking does not install an update itself.",
+            "Launcher updates request version information and files from downloads.femboylauncher.ru; legacy or reserve channels can use Yandex Disk and GitHub. In version 0.11.0, background checks can be disabled in Settings; when enabled, checks occur after startup and approximately every two hours. Setup can download and install an update on exit; Portable reports availability. Manual checking remains a separate action.",
+            "Mod and modpack checks contact Modrinth and, for applicable instances, CurseForge. Requests can include project identifiers, game and loader versions, mod-file hashes and a configured CurseForge API key when required. In version 0.11.0, the shared mod/modpack choice stops new background checks; readiness hints for a new Minecraft version have a separate switch. Already-sent requests cannot be undone. Checking does not install an update itself.",
             "Discord Rich Presence sends activity to the local Discord client: instance name, game or loader, start time and sometimes server address. Discord controls subsequent processing. Disable game activity in Discord or hide the server address in Settings; hiding the address does not hide the other activity fields.",
-            "Sign-in, session refresh and skins use Microsoft/Xbox/Minecraft or Ely.by. Skin lookup by name can query Mojang and then Ely.by. Published builds can retrieve account images through MCHeads and remote skin addresses. In the prepared build, passive rendering uses local images or initials, and Microsoft skin/cape loading requires a button click. An offline account does not disable other networking.",
+            "Sign-in, session refresh and skins use Microsoft/Xbox/Minecraft or Ely.by. Skin lookup by name can query Mojang and then Ely.by. Version 0.10.2 and earlier builds can retrieve account images through MCHeads and remote skin addresses. In version 0.11.0, passive rendering uses local images or initials, and Microsoft skin/cape loading requires a button click. An offline account does not disable other networking.",
             "Catalogs, images, game versions, Java, loaders and requested content can be fetched when the relevant interface opens or content is used. Recipients include Mojang/Minecraft, Adoptium, Fabric, Quilt, Forge, NeoForge, Modrinth, CurseForge and the file/image hosts chosen by content projects. The mirror setting routes some downloads through BMCLAPI. Choosing official sources changes download routing but does not disable authentication, catalogs or other services.",
             "Server and connection checks contact the endpoints being tested. Preparing a local diagnostic ZIP also checks configured service endpoints: saving a report locally does not make its preparation network-free. An e4mc check can contact its broker and selected relay. Opening a world through e4mc lets other players connect through a relay; use it only when intending to share the world.",
             "Synchronization reads and writes a folder you select. If an external cloud client manages it, that client controls uploads and retention under its own rules. Turning off launcher synchronization neither deletes cloud copies nor stops an independent cloud application."
@@ -125,10 +125,10 @@
         ],
         [
           "choices",
-          "Choices in the prepared build",
+          "Choices in version 0.11.0",
           [
-            "In the prepared newer build, interactive Setup and first launch of a fresh profile offer four independent choices: background launcher updates, mod/modpack checks, mod readiness hints and Discord activity. All four start off. The recorded choice is applied before optional background services begin.",
-            "A valid existing profile retains settings on normal startup and silent updates. An explicit interactive-installation choice replaces the four matching values. Other requests, such as sign-in, opening catalogs and launching the game, are not disabled by these four switches. Do not expect the new choice window in the current public 0.10.2 release."
+            "In version 0.11.0, interactive Setup and first launch of a fresh profile offer four independent choices: background launcher updates, mod/modpack checks, mod readiness hints and Discord activity. All four start off. The recorded choice is applied before optional background services begin.",
+            "A valid existing profile retains settings on normal startup and silent updates. An explicit interactive-installation choice replaces the four matching values. Other requests, such as sign-in, opening catalogs and launching the game, are not disabled by these four switches. Version 0.10.2 and earlier do not include the new choice window."
           ]
         ],
         [

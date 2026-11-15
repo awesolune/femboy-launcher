@@ -1,6 +1,6 @@
 # Code signing policy — preparation
 
-As of November 15, 2026, SignPath Foundation has declined the application for free signing because the project does not yet have sufficient public visibility and verifiable reputation. This is not a criticism of the project’s quality. The Foundation suggested reapplying after visibility grows or using a paid subscription; neither option has been selected. **The application is no longer pending. Public release 0.10.2 is unsigned; no approval, certificate or integration is in place.**
+As of November 15, 2026, SignPath Foundation has declined the application for free signing because the project does not yet have sufficient public visibility and verifiable reputation. This is not a criticism of the project’s quality. The Foundation suggested reapplying after visibility grows or using a paid subscription; neither option has been selected. **The application is no longer pending. Public release 0.11.0 is unsigned; no approval, certificate or integration is in place.**
 
 ## Scope
 
@@ -52,4 +52,4 @@ Notice preservation now resolves checksum 0.1.1 using its exact upstream copyrig
 
 ## Public policy update — 15 November 2026
 
-Current public policy: https://femboylauncher.ru/en/privacy/ ; signing policy: https://femboylauncher.ru/en/code-signing/ . The upstream lazy-val implementation was replaced in revision 3806188d1c7055341fa87b02eb5c4e990986a838 by a project-owned GPL-3.0-only adapter. Notice generation now reports complete=true with no pending entries and rejects missing notices. Hosted build 43628525970 passed 976 Node and 976 Electron Node tests plus unsigned packaging. Earlier lazy-val review notes above are historical. Complete notice coverage is not general legal clearance or Foundation acceptance. The public release remains unsigned 0.10.2; the application has not been submitted.
+Current public policy: https://femboylauncher.ru/en/privacy/ ; signing policy: https://femboylauncher.ru/en/code-signing/ . The upstream lazy-val implementation was replaced in revision 3806188d1c7055341fa87b02eb5c4e990986a838 by a project-owned GPL-3.0-only adapter. Notice generation now reports complete=true with no pending entries and rejects missing notices. Hosted build 43628525970 passed 976 Node and 976 Electron Node tests plus unsigned packaging. Earlier lazy-val review notes above are historical. Complete notice coverage is not general legal clearance or Foundation acceptance. Public release 0.11.0 is unsigned. The application was submitted and declined on November 15, 2026 because the project does not yet have sufficient public visibility and verifiable reputation; it is no longer pending.

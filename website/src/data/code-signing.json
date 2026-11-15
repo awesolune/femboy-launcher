@@ -2,14 +2,14 @@
   "ru": {
     "title": "Code signing policy",
     "description": "Текущий статус цифровой подписи Femboy Launcher.",
-    "intro": "Обновлено 15 ноября 2026 года. Публичный выпуск 0.10.2 не имеет цифровой подписи. SignPath Foundation отказал в бесплатной подписи из-за недостаточной публичной известности и проверяемой репутации проекта. Рассмотрение этой заявки завершено; одобрения, сертификата и интеграции нет.",
+    "intro": "Обновлено 15 ноября 2026 года. Публичный выпуск 0.11.0 не имеет цифровой подписи. SignPath Foundation отказал в бесплатной подписи из-за недостаточной публичной известности и проверяемой репутации проекта. Рассмотрение этой заявки завершено; одобрения, сертификата и интеграции нет.",
     "sections": [
       [
         "status",
         "Текущий статус",
         [
           "Отказ не является претензией к качеству проекта. Foundation предложил повторно подать заявку после роста публичной известности или воспользоваться платной подпиской. Ни один из этих вариантов пока не выбран; подпись не обещана.",
-          "Успешная проверочная сборка на GitHub подтверждает прохождение этапов сборки и тестов, но сама по себе не является подписью или одобрением Foundation. Тестовые файлы не заменяют опубликованные файлы 0.10.2."
+          "Успешная проверочная сборка на GitHub подтверждает прохождение этапов сборки и тестов, но сама по себе не является подписью или одобрением Foundation. Публичные файлы 0.11.0 собраны из сохранённой ревизии; контрольные суммы относятся к окончательным файлам. Пробные сборки не заменяют опубликованные файлы."
         ]
       ],
       [
@@ -48,14 +48,14 @@
   "en": {
     "title": "Code signing policy",
     "description": "Current code-signing status of Femboy Launcher.",
-    "intro": "Updated November 15, 2026. Public release 0.10.2 is unsigned. SignPath Foundation declined free signing because the project does not yet have sufficient public visibility and verifiable reputation. This application is no longer pending; no approval, certificate or integration is in place.",
+    "intro": "Updated November 15, 2026. Public release 0.11.0 is unsigned. SignPath Foundation declined free signing because the project does not yet have sufficient public visibility and verifiable reputation. This application is no longer pending; no approval, certificate or integration is in place.",
     "sections": [
       [
         "status",
         "Current status",
         [
           "The refusal is not a criticism of the project’s quality. The Foundation suggested reapplying after public visibility grows or using a paid subscription. Neither option has been selected, and signing is not promised.",
-          "A successful GitHub preparation build confirms completion of build and test steps; it is not a signature or Foundation approval. Preparation artifacts do not replace the published 0.10.2 files."
+          "A successful GitHub preparation build confirms completion of build and test steps; it is not a signature or Foundation approval. Public 0.11.0 files were built from a committed revision, and their checksums refer to the final files. Trial builds do not replace published files."
         ]
       ],
       [

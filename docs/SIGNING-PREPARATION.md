@@ -1,6 +1,12 @@
-# Signing preparation checkpoint — 2026-11-14
+# Signing preparation checkpoint — 2026-11-15
 
-## Current source status
+## Current release status
+
+Public release 0.11.0 is unsigned. SignPath Foundation declined free signing on November 15, 2026 because the project does not yet have sufficient public visibility and verifiable reputation, not because of a criticism of its quality. The application is no longer pending; no approval, certificate or integration is in place. Reapplication or a paid subscription has not been selected.
+
+The project-owned adapter and packaged notices have been checked; current local Node and Electron Node suites each passed 979 tests. The RU/EN privacy and signing policies are public. The following older preparation notes are historical, not a list of current unsigned-release blockers.
+
+## Historical preparation notes — November 14, 2026
 
 The project is preparing for code signing. SignPath Foundation acceptance, a configured signing integration and a signed release have not been confirmed. The current public release must not be described as signed by SignPath.
 
