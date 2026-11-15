@@ -1,6 +1,6 @@
 # Code signing policy — preparation
 
-Femboy Launcher is preparing to apply for free open-source code signing through SignPath Foundation. **The project has not yet been accepted, and the current release is not claimed to be signed by SignPath.**
+As of November 15, 2026, SignPath Foundation has declined the application for free signing because the project does not yet have sufficient public visibility and verifiable reputation. This is not a criticism of the project’s quality. The Foundation suggested reapplying after visibility grows or using a paid subscription; neither option has been selected. **The application is no longer pending. Public release 0.10.2 is unsigned; no approval, certificate or integration is in place.**
 
 ## Scope
 

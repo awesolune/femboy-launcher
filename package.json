@@ -1,7 +1,7 @@
 {
   "name": "femboy-launcher",
   "productName": "Femboy Launcher",
-  "version": "0.10.2",
+  "version": "0.11.0",
   "description": "Minecraft-лаунчер с бойкиссером: сборки, моды и модпаки с Modrinth/CurseForge, вход через Microsoft, Ely.by и оффлайн",
   "author": "Femboy Launcher",
   "main": "src/main.js",
