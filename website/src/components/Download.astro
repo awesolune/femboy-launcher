@@ -6,21 +6,24 @@ import { resolveDownloads } from '../lib/downloads.js';
 import Icon from './Icon.astro';
 
 const d = resolveDownloads(config);
+const { standalone = false } = Astro.props;
+const Heading = standalone ? 'h1' : 'h2';
+const CardHeading = standalone ? 'h2' : 'h3';
 for (const w of d.warnings) console.warn(`[downloads.json] ${w}`);
 
 const details: Record<string, { sub: string; points: string[]; recommended?: boolean }> = {
   setup: {
-    sub: 'Обычная установка с ярлыками. Подходит почти всем.',
+    sub: 'Для игры на своём компьютере. Установка, ярлыки и автоматические обновления.',
     recommended: true,
     points: [
       'Можно выбрать папку, ярлыки на рабочем столе и в «Пуске»',
-      'Обновляется сам: проверяет при запуске и раз в 2 часа, качает в фоне и ставит по кнопке или при закрытии',
+      'Фоновые обновления можно включить в настройках; установка — по кнопке или при закрытии',
       'Двойной щелчок по файлу .mrpack открывает модпак в лаунчере',
       'Удаляется через «Приложения» Windows, сборки, миры и аккаунты остаются',
     ],
   },
   portable: {
-    sub: 'Один файл без установки. Удобно на флешке или если нельзя ставить программы.',
+    sub: 'Для флешки или отдельной папки. Запускается без установки.',
     points: [
       'Сборки, миры, Java и настройки лежат в папке data рядом с файлом, всё можно унести целиком',
       'Сам не обновляется: лаунчер сообщит о новой версии, а скачать её нужно отсюда же',
@@ -36,7 +39,11 @@ const yandex = config.storage.provider === 'yandex';
   <div class="wrap">
     <div class="dl-panel">
       <div class="dl-head">
-        <h2 id="download-title">Скачать для Windows</h2>
+        <div class="dl-heading-copy">
+          <p class="section-kicker">ТВОЙ СЛЕДУЮЩИЙ МИР НАЧИНАЕТСЯ ЗДЕСЬ</p>
+          <Heading id="download-title">{standalone ? 'Скачать Femboy Launcher' : 'Выбирай свой вариант.'}</Heading>
+          <p class="dl-intro">Первый раз? Начни с установщика — он подойдёт для обычной игры на компьютере.</p>
+        </div>
         <ul class="dl-facts" aria-label="О выпуске">
           {d.version && <li>Версия {d.version}</li>}
           {d.date && <li>Вышла <time datetime={d.date.iso}>{d.date.label}</time></li>}
@@ -51,28 +58,23 @@ const yandex = config.storage.provider === 'yandex';
             return (
               <article class={`dl-option${info.recommended ? ' recommended' : ''}`} aria-labelledby={`dl-${o.id}`}>
                 <header>
-                  <h3 id={`dl-${o.id}`}>
+                  <div class="dl-card-top"><span class="dl-card-icon"><Icon name={o.id === 'setup' ? 'download' : 'folder'} /></span>{info.recommended ? <span class="badge">Рекомендуем для начала</span> : <span class="dl-card-label">Без установки</span>}</div>
+                  <CardHeading id={`dl-${o.id}`}>
                     {o.title}
-                    {info.recommended && <span class="badge">Советуем</span>}
-                  </h3>
+                  </CardHeading>
                   <p class="sub">{info.sub}</p>
                 </header>
-                <ul class="ticks">
-                  {info.points.map((p) => (
-                    <li>{p}</li>
-                  ))}
-                </ul>
+
                 <div class="dl-action">
                   {o.href && o.direct && (
-                    <a class="btn btn-primary btn-lg" href={o.href} download={o.fileName ?? true} data-dl={o.id} rel="noreferrer" referrerpolicy="no-referrer">
+                    <a class={`btn ${info.recommended ? 'btn-primary' : 'btn-soft'} btn-lg`} href={o.href} download={o.fileName ?? true} data-dl={o.id} rel="noreferrer" referrerpolicy="no-referrer">
                       <Icon name="download" />
                       {o.action}
-                      {o.size && <span class="sr-only">, {o.size}</span>}
+                      {o.size && <span class="dl-button-size">{o.size}</span>}
                     </a>
                   )}
                   {o.direct && d.storage.folderUrl && (
-                    <a class="btn btn-soft" href={d.storage.folderUrl} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-describedby={`dl-${o.id}-file`}>
-                      <Icon name="folder" />
+                    <a class="dl-fallback" href={d.storage.folderUrl} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-describedby={`dl-${o.id}-file`}>
                       Запасной вариант: Яндекс.Диск
                       <span class="sr-only"> (откроется в новой вкладке)</span>
                     </a>
@@ -122,6 +124,11 @@ const yandex = config.storage.provider === 'yandex';
                     </details>
                   )}
                 </div>
+                <ul class="ticks">
+                  {info.points.map((p) => (
+                    <li>{p}</li>
+                  ))}
+                </ul>
               </article>
             );
           })
@@ -130,7 +137,7 @@ const yandex = config.storage.provider === 'yandex';
 
       <div class="dl-foot">
         <div class="dl-notes">
-        <p class="note">Бесплатная подпись SignPath Foundation пока недоступна. Публичная версия не подписана. <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}code-signing/`}>Code signing policy</a> · <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}privacy/`}>Политика конфиденциальности</a></p>
+        <p class="note signing-note"><strong>Перед первым запуском</strong><span>Публичная версия не подписана. Windows может показать предупреждение. <a href="#help">Помощь с запуском</a> · <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}code-signing/`}>О цифровой подписи</a> · <a href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}privacy/`}>Политика конфиденциальности</a></span></p>
         {
           folder && (
             <p class="note">
@@ -147,9 +154,9 @@ const yandex = config.storage.provider === 'yandex';
         {
           d.highlights.length > 0 && d.version && (
             <div class="whatsnew">
-              <h3>Что нового в {d.version}</h3>
+              <CardHeading>Что нового в {d.version}</CardHeading>
               <ul>
-                {d.highlights.map((h) => (
+                {d.highlights.slice(0, 3).map((h) => (
                   <li>{h}</li>
                 ))}
               </ul>
@@ -161,4 +168,3 @@ const yandex = config.storage.provider === 'yandex';
     </div>
   </div>
 </section>
-

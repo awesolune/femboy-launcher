@@ -3,6 +3,7 @@
 import { parse, serialize } from 'parse5';
 import messages from '../data/en.json' with { type: 'json' };
 import releases from '../data/releases.json' with { type: 'json' };
+import { SITE_PAGES } from './routes.js';
 
 const normalise = (s) => s.trim().replace(/\s+/g, ' ');
 const dictionary = new Map(Object.entries(messages));
@@ -39,7 +40,7 @@ export function englishText(value) {
 export function localizeHtml(html, base = '/') {
   const tree = parse(html);
   const localized = (path) => path.startsWith(base) && !path.startsWith(base + 'en/') &&
-    ['', 'releases/', 'guides/setup-or-portable/', 'guides/install-modrinth-modpack/', 'privacy/', 'code-signing/'].includes(path.slice(base.length).split('#')[0].split('?')[0]);
+    SITE_PAGES.includes(path.slice(base.length).split('#')[0].split('?')[0]);
   function visit(node) {
     if (['script', 'style', 'svg'].includes(node.tagName)) return;
     if (node.nodeName === '#text') node.value = englishText(node.value);

@@ -8,12 +8,12 @@ const onHome = Astro.url.pathname.replace(/\/$/, '') === base.replace(/\/$/, '')
 const homeLink = (hash: string) => onHome ? hash : `${base}${hash}`;
 
 const links = [
-  { href: '#features', label: 'Возможности' },
-  { href: '#gallery', label: 'Интерфейс' },
-  { href: '#themes', label: 'Темы' },
-  { href: '#start', label: 'Как начать' },
-  { href: '#faq', label: 'Вопросы' },
+  { href: '', label: 'Главная' },
+  { href: 'features/', label: 'Возможности' },
+  { href: 'interface/', label: 'Интерфейс' },
+  { href: 'help/', label: 'Помощь' },
 ];
+const current = Astro.url.pathname.slice(base.length).replace(/^en\/?/, '').replace(/\/$/, '');
 ---
 
 <header class="site-header">
@@ -24,7 +24,7 @@ const links = [
     </a>
     <nav class="nav" id="site-nav" aria-label="Разделы страницы">
       <ul>
-        {links.map((l) => <li><a href={homeLink(l.href)}>{l.label}</a></li>)}
+        {links.map((l) => <li><a href={base + l.href} aria-current={current === l.href.replace(/\/$/, '') ? 'page' : undefined}>{l.label}</a></li>)}
       </ul>
     </nav>
     <div class="header-actions">
@@ -33,7 +33,7 @@ const links = [
         <span class="moon"><Icon name="moon" /></span>
         <span class="sun"><Icon name="sun" /></span>
       </button>
-      <a class="btn btn-primary header-dl" href={homeLink('#download')}><Icon name="download" /><span class="lbl">Скачать<span class="long"> для Windows</span></span></a>
+      {current !== '' && <a class="btn btn-primary header-dl" href={`${base}download/`} aria-current={current === 'download' ? 'page' : undefined}><Icon name="download" /><span class="lbl">Скачать<span class="long"> для Windows</span></span></a>}
       <button class="icon-btn menu-btn" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Меню разделов">
         <Icon name="menu" />
       </button>

@@ -2,6 +2,19 @@
 // Без библиотек; страница целиком работает и без этого скрипта (меню и галерея тогда просто не раскрываются).
 
 import { initYandexDownloads } from '../lib/yandex-download.js';
+import { sectionPage } from '../lib/routes.js';
+
+// Existing launcher/download/help links still target the old home-page hashes.
+try {
+  const id = decodeURIComponent(location.hash.slice(1));
+  const page = id ? sectionPage(id) : null;
+  if (page !== null && !document.getElementById(id)) {
+    const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+    const prefix = document.documentElement.lang === 'en' ? 'en/' : '';
+    const target = base + prefix + page;
+    if (location.pathname !== target) location.replace(target + location.search + '#' + (id === 'feedback' ? 'contacts-title' : id));
+  }
+} catch { /* A malformed hash must not interrupt page controls. */ }
 
 initYandexDownloads();
 
@@ -90,18 +103,29 @@ if (dlg && typeof dlg.showModal === 'function') {
   const img = dlg.querySelector('#lb-img');
   const cap = dlg.querySelector('#lb-caption');
   const count = dlg.querySelector('#lb-count');
+  const brightness = dlg.querySelector('[data-lb-brightness]');
   let items = [];
   let index = 0;
 
   const show = (i) => {
     index = (i + items.length) % items.length;
     const t = items[index];
-    img.src = t.dataset.full;
+    const dark = root.dataset.theme === 'midnight';
+    const softened = dark && !t.dataset.fullDark;
+    img.src = dark && t.dataset.fullDark ? t.dataset.fullDark : t.dataset.full;
+    img.classList.toggle('shot-softened', softened);
+    if (brightness) { brightness.hidden = !softened; brightness.setAttribute('aria-pressed', 'false'); }
     img.alt = t.dataset.alt || t.dataset.caption || '';
     cap.textContent = t.dataset.caption || '';
     count.textContent = items.length > 1 ? `${index + 1} ${en ? 'of' : 'из'} ${items.length}` : '';
     dlg.querySelectorAll('[data-lb-prev], [data-lb-next]').forEach((b) => (b.hidden = items.length < 2));
   };
+
+  brightness?.addEventListener('click', () => {
+    const original = brightness.getAttribute('aria-pressed') !== 'true';
+    brightness.setAttribute('aria-pressed', String(original));
+    img.classList.toggle('shot-softened', !original);
+  });
 
   document.querySelectorAll('[data-lb]').forEach((trigger) =>
     trigger.addEventListener('click', () => {

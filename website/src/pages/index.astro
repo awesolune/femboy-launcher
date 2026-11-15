@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import HomeExplore from '../components/HomeExplore.astro';
 import Overview from '../components/Overview.astro';
 import Features from '../components/Features.astro';
 import Gallery from '../components/Gallery.astro';
@@ -21,14 +22,8 @@ const { version } = resolveDownloads(config);
   <Header />
   <main id="main">
     <Hero version={version} />
+    <HomeExplore />
     <Overview />
-    <Features />
-    <Gallery />
-    <Themes />
-    <Start />
-    <Download />
-    <Help />
-    <Faq />
   </main>
   <Footer />
   <script src="../scripts/site.js"></script>

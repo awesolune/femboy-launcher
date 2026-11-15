@@ -1,0 +1,10 @@
+---
+import Icon from './Icon.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const cards = [
+  { icon:'folder', title:'Собирай по-своему', text:'Свои миры, моды и настройки — отдельно для каждой сборки.', href:'features/', action:'Все возможности' },
+  { icon:'sun', title:'Найди своё настроение', text:'Посмотри интерфейс и примерь «Сакуру» или «Полночь».', href:'interface/', action:'Открыть интерфейс' },
+  { icon:'restore', title:'Начни без лишней возни', text:'Установка, первый запуск и ответы на частые вопросы.', href:'help/', action:'Перейти к помощи' },
+];
+---
+<section class="home-explore section" aria-label="Познакомиться с лаунчером"><div class="wrap home-explore-grid">{cards.map(c=><article><span class="explore-icon"><Icon name={c.icon}/></span><h2>{c.title}</h2><p>{c.text}</p><a href={base+c.href}>{c.action}<Icon name="next"/></a></article>)}</div></section>

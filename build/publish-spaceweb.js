@@ -23,6 +23,7 @@ function hostingConfig(file = LOCAL_CONFIG) {
   if (!/^https?:\/\/[A-Za-z0-9.-]{1,253}$/.test(preview) || placeholder(preview)) throw new Error('Local hosting configuration build/website-hosting.local.json: fill in a real "previewUrl"');
   return { host, preview };
 }
+const MULTIPAGE_ROUTES = ['features/', 'en/features/', 'interface/', 'en/interface/', 'download/', 'en/download/', 'help/', 'en/help/'];
 const ROUTES = ['', 'en/', 'releases/', 'en/releases/', 'guides/setup-or-portable/', 'en/guides/setup-or-portable/', 'guides/install-modrinth-modpack/', 'en/guides/install-modrinth-modpack/'];
 const digest = b => crypto.createHash('sha256').update(b).digest('hex');
 const allowed = new Set(['.html','.css','.js','.json','.png','.ico','.webp','.woff2','.txt','.vtt','.mp4','.jpg','.xml','.webmanifest','.svg','.woff','.jpeg','.avif','.gif']);
@@ -55,7 +56,9 @@ function plan(project, { preview = true, out = 'website/dist', previewHost } = {
   }
   walk(folder);
   for (const required of ['404.html', 'robots.txt', 'sitemap.xml']) if (!files.some(f => f.name === required && f.body.length)) throw new Error('Required website file is missing: ' + required);
-  for (const route of ROUTES) {
+  const multipage = files.some(f => MULTIPAGE_ROUTES.some(route => f.name === route + 'index.html'));
+  const requiredRoutes = [...new Set([...ROUTES, ...(multipage ? MULTIPAGE_ROUTES : []), ...files.filter(f => f.name.endsWith('/index.html')).map(f => f.name.slice(0, -10))])];
+  for (const route of requiredRoutes) {
     const file = files.find(f => f.name === route + 'index.html');
     if (!file || !file.body.includes('Femboy Launcher')) throw new Error('Required website page is missing');
     const html = file.body.toString('utf8');
@@ -63,7 +66,9 @@ function plan(project, { preview = true, out = 'website/dist', previewHost } = {
     if (!preview && /<meta\b[^>]*\bname=["']robots["'][^>]*\bcontent=["'][^"']*noindex/i.test(html)) throw new Error('Production page contains noindex');
   }
   const home = files.find(f => f.name === 'index.html').body.toString('utf8');
-  if (!home.includes(`FemboyLauncher-Setup-${version}.exe`) || !home.includes(`FemboyLauncher-Portable-${version}.exe`) || !home.includes('https://downloads.femboylauncher.ru/')) throw new Error('Website download version does not match published metadata');
+  const download = multipage ? files.find(f => f.name === 'download/index.html').body.toString('utf8') : home;
+  if (multipage && !/href=["'][^"']*\/download\/(?:[?#][^"']*)?["']/.test(home)) throw new Error('Website home has no download page link');
+  if (!download.includes(`FemboyLauncher-Setup-${version}.exe`) || !download.includes(`FemboyLauncher-Portable-${version}.exe`) || !download.includes('https://downloads.femboylauncher.ru/')) throw new Error('Website download version does not match published metadata');
   // Технический адрес хостинга в боевой публикации получает noindex; сам адрес — из локальной конфигурации (previewHost)
   if (!preview && !/^[A-Za-z0-9-]+(?:[.][A-Za-z0-9-]+)+$/.test(previewHost || '')) throw new Error('Local hosting configuration: the technical preview host is required for production rules');
   const previewHostRe = preview ? '' : previewHost.split('.').join('[.]');
@@ -225,7 +230,7 @@ async function publish(p, remote, { log = () => {}, verify = async () => {} } = 
 
 async function verifyPublic(p, config) {
   const origin = p.preview ? (config || hostingConfig()).preview : 'https://femboylauncher.ru';
-  for (const route of ROUTES) {
+  for (const route of p.files.filter(f => f.name === 'index.html' || f.name.endsWith('/index.html')).map(f => f.name.slice(0, -10))) {
     const response = await fetch(origin + '/' + route + '?deployment=' + p.id, { cache: 'no-store', signal: AbortSignal.timeout(20000) });
     const html = await response.text();
     const expected = p.files.find(f => f.name === route + 'index.html');

@@ -154,3 +154,36 @@ test('Production Apache rules preserve HTTPS directory redirects and protect dep
   assert.doesNotMatch(preview, /Strict-Transport-Security/);
   assert.match(preview, /X-Robots-Tag "noindex, nofollow"/);
 });
+
+test('SpaceWeb accepts dedicated downloads and requires both languages of every new page', t => {
+  const f = fixture(t);
+  const original = fs.readFileSync(path.join(f.out, 'index.html'), 'utf8');
+  const routes = ['features/', 'en/features/', 'interface/', 'en/interface/', 'download/', 'en/download/', 'help/', 'en/help/'];
+  for (const route of routes) {
+    fs.mkdirSync(path.join(f.out, route), { recursive: true });
+    fs.writeFileSync(path.join(f.out, route, 'index.html'), original.replace('lang="ru"', `lang="${route.startsWith('en/') ? 'en' : 'ru'}"`));
+  }
+  fs.writeFileSync(path.join(f.out, 'index.html'), '<html lang="ru"><head></head><body>Femboy Launcher <a href="/download/">Download</a></body></html>');
+  assert.doesNotThrow(() => plan(f.root, { preview: false, previewHost: 'site.fixture.test' }));
+  const translated = path.join(f.out, 'en/features/index.html');
+  fs.unlinkSync(translated);
+  assert.throws(() => plan(f.root), /Required website page/);
+});
+
+test('SpaceWeb rejects wrong download metadata, wrong new-page language and noindex before publishing', t => {
+  const f = fixture(t), original = fs.readFileSync(path.join(f.out, 'index.html'), 'utf8');
+  for (const route of ['features/', 'en/features/', 'interface/', 'en/interface/', 'download/', 'en/download/', 'help/', 'en/help/']) {
+    fs.mkdirSync(path.join(f.out, route), { recursive: true });
+    fs.writeFileSync(path.join(f.out, route, 'index.html'), original.replace('lang="ru"', `lang="${route.startsWith('en/') ? 'en' : 'ru'}"`));
+  }
+  fs.writeFileSync(path.join(f.out, 'index.html'), '<html lang="ru"><head></head><body>Femboy Launcher <a href="/download/">Download</a></body></html>');
+  const download = path.join(f.out, 'download/index.html');
+  fs.writeFileSync(download, original.replaceAll('0.10.2.exe', '0.10.1.exe'));
+  assert.throws(() => plan(f.root), /version/);
+  fs.writeFileSync(download, original);
+  const translated = path.join(f.out, 'en/help/index.html');
+  fs.writeFileSync(translated, original);
+  assert.throws(() => plan(f.root), /wrong language/);
+  fs.writeFileSync(translated, original.replace('lang="ru"', 'lang="en"').replace('<head>', '<head><meta name="robots" content="noindex">'));
+  assert.throws(() => plan(f.root, { preview: false, previewHost: 'site.fixture.test' }), /Production page/);
+});

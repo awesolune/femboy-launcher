@@ -10,7 +10,7 @@ interface Props {
   version: string | null;
 }
 const { version } = Astro.props;
-const sizes = '(max-width: 900px) calc(100vw - 32px), 640px';
+const sizes = '(max-width: 900px) calc(100vw - 32px), 720px';
 // Лепестки: немного, только CSS, не ловят нажатия; при «меньше движения» не показываются
 const petals = Array.from({ length: 9 }, (_, i) => ({
   x: `${(i * 11.3 + 4) % 100}%`,
@@ -27,23 +27,24 @@ const petals = Array.from({ length: 9 }, (_, i) => ({
   </div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
+      <p class="hero-eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>Minecraft Java Edition · Windows</p>
       <h1 id="hero-title">
         <span class="wordmark" translate="no">Femboy Launcher</span>
-        <span class="tagline">Уютный уголок для твоего Minecraft</span>
+        <span class="tagline">Твой Minecraft.<br /><em>Немного уютнее.</em></span>
       </h1>
       <p class="hero-lead">
-        Бесплатный лаунчер Minecraft Java Edition для Windows с котиком: сборки с модами за пару щелчков, Fabric, Forge и другие загрузчики, моды с Modrinth,
-        помощь при вылетах и вход через Microsoft, Ely.by или просто по нику.
+        Моды, сборки и миры — в одном месте. Выбирай, во что играть, а Java и загрузчики лаунчер скачает сам.
       </p>
       <div class="hero-cta">
-        <a class="btn btn-primary btn-lg" href="#download"><Icon name="download" />Скачать для Windows</a>
-        <a class="btn btn-soft btn-lg" href="#overview"><Icon name="play" />Смотреть обзор</a>
+        <a class="btn btn-primary btn-lg" href="#download"><Icon name="download" />Скачать для Windows<Icon name="next" /></a>
+        <a class="hero-secondary" href="#gallery">Посмотреть интерфейс<Icon name="next" /></a>
       </div>
       <ul class="hero-meta" aria-label="Коротко">
-        {version && <li>Версия {version}</li>}
-        <li>Windows 10 и 11</li>
-        <li>Русский и английский</li>
+        <li><Icon name="check" />Бесплатно</li>
+        <li><Icon name="check" />Windows 10 и 11</li>
+        <li><Icon name="check" />Русский и английский</li>
       </ul>
+      <a class="hero-version" href={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}releases/`}>{version ? `Что нового в ${version}` : 'История версий'}<Icon name="next" /></a>
     </div>
 
     <div class="hero-shot">
@@ -70,6 +71,13 @@ const petals = Array.from({ length: 9 }, (_, i) => ({
       <div class="paws" aria-hidden="true">
         <svg viewBox="0 0 40 30"><path d="M4 28 C2 12 10 3 20 3 C30 3 38 12 36 28" fill="#fff" stroke="#231a29" stroke-width="3" stroke-linecap="round"/><path d="M16 16 v8 M24 16 v8" stroke="#231a29" stroke-width="2.6" stroke-linecap="round"/></svg>
         <svg viewBox="0 0 40 30"><path d="M4 28 C2 12 10 3 20 3 C30 3 38 12 36 28" fill="#fff" stroke="#231a29" stroke-width="3" stroke-linecap="round"/><path d="M16 16 v8 M24 16 v8" stroke="#231a29" stroke-width="2.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="hero-caption">
+        <span>Главный экран лаунчера</span>
+        <div class="hero-themes" role="group" aria-label="Тема сайта">
+          <button type="button" data-set-theme="sakura" aria-pressed="false"><Icon name="sun" />Сакура</button>
+          <button type="button" data-set-theme="midnight" aria-pressed="false"><Icon name="moon" />Полночь</button>
+        </div>
       </div>
     </div>
   </div>
