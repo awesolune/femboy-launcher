@@ -520,11 +520,6 @@ html:has(.lightbox[open]) { overflow: hidden; }
 .overview-frame { overflow: hidden; border-radius: var(--r-xl); border: 1px solid var(--stroke); background: #0b0e1f; box-shadow: var(--shadow); }
 .overview-frame video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
 .overview-caption { color: var(--muted); font-size: 0.95rem; margin-top: 16px; max-width: 60rem; }
-.overview-transcript { margin-top: 20px; border: 1px solid var(--stroke); border-radius: var(--r-md); background: var(--glass); padding: 0 24px; }
-.overview-transcript summary { cursor: pointer; font-weight: 700; padding: 16px 0; min-height: 44px; }
-.overview-transcript ol { display: grid; gap: 10px; padding: 0 0 20px 1.4em; margin: 0; color: var(--muted); }
-.overview-transcript strong { color: var(--text); }
-@media (max-width: 560px) { .overview-transcript { padding-inline: 18px; } }
 
 /* ---------- история версий ---------- */
 .release-history-link { display: inline-block; margin-top: 16px; font-weight: 700; }
@@ -585,13 +580,6 @@ html:has(.lightbox[open]) { overflow: hidden; }
 .feedback-invite > div { flex: 1 1 360px; min-width: 0; }
 .feedback-invite h3 { font-size: 1.1rem; margin-bottom: 6px; }
 .feedback-invite p { color: var(--muted); font-size: 0.98rem; max-width: 48rem; }
-.foot-share { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; padding-top: 24px; border-top: 1px solid var(--border); min-width: 0; }
-.foot-share > div { min-width: 0; }
-.foot-share h2 { font-size: 1.15rem; margin-bottom: 8px; }
-.foot-share p { color: var(--muted); font-size: 0.98rem; margin-bottom: 8px; }
-.share-address { overflow-wrap: anywhere; font-size: 0.95rem; }
-.share-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.share-actions .btn { --h: 44px; padding: 0 16px; font-size: 0.9rem; }
 .foot-small { grid-column: 1 / -1; color: var(--muted); font-size: 0.9rem; padding-top: 24px; border-top: 1px solid var(--border); }
 /* котик выглядывает из-за края подвала */
 .foot-cat { position: absolute; right: max(var(--gutter), calc((100% - var(--wrap)) / 2) + 24px); bottom: calc(100% - 1px); width: 96px; aspect-ratio: 166 / 130; overflow: hidden; pointer-events: none; }
@@ -610,11 +598,15 @@ html:has(.lightbox[open]) { overflow: hidden; }
 
 /* Language navigation stays visible on small screens. */
 .language-switch { display:flex; align-items:center; gap:.3rem; font-size:.8rem; flex-shrink:0; }
-.language-switch a { text-decoration:none; padding:.4rem .2rem; opacity:.65; }
+.language-switch a { text-decoration:none; padding:.4rem .35rem; opacity:.88; } /* .88: контраст неактивного языка ≥4.5:1 в обеих темах */
 .language-switch a[aria-current="true"] { opacity:1; font-weight:900; text-decoration:underline; text-underline-offset:.3rem; }
 .language-switch a:hover, .language-switch a:focus-visible { opacity:1; }
 .contact-intro { max-width:58ch; margin:.5rem 0 1rem; }
 @media (max-width:420px) { .header-actions { gap:.35rem; } .language-switch { gap:.1rem; font-size:.75rem; } .site-header .brand-name { font-size:1rem; } }
+/* 320px (увеличение 400%): с кнопкой скачивания в шапке не помещается название — остаётся значок, у ссылки есть aria-label */
+@media (max-width:360px) { .site-header .brand-name { display:none; } }
+/* Отдельная ссылка «На главную» над инструкциями и политиками — удобная область нажатия */
+.guide > a:first-child, .policy-page > a:first-child { display:inline-flex; align-items:center; min-height:44px; }
 
 /* Optional project support */
 .foot-support { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; padding: 24px; border: 1px solid var(--stroke); border-radius: var(--r-md); background: var(--glass-strong); min-width: 0; }

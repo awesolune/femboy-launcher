@@ -10,11 +10,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const onHome = Astro.url.pathname.replace(/\/$/, '') === base.replace(/\/$/, '');
 const homeLink = (hash: string) => onHome ? hash : `${base}${hash}`;
 const year = d.date ? d.date.iso.slice(0, 4) : null;
-const english = Astro.url.pathname.startsWith(base + 'en/');
-const shareUrl = Astro.site ? new URL(base + (english ? 'en/' : ''), Astro.site).href : null;
-const telegramShare = new URL('https://t.me/share/url');
-if (shareUrl) telegramShare.searchParams.set('url', shareUrl);
-telegramShare.searchParams.set('text', english ? 'Femboy Launcher — Minecraft launcher for Windows' : site.title);
 ---
 
 <footer class="site-footer multi-footer">
@@ -56,19 +51,6 @@ telegramShare.searchParams.set('text', english ? 'Femboy Launcher — Minecraft 
         <li><a class="contact-identity" href={`https://t.me/${site.contacts.telegram}`} target="_blank" rel="noopener"><span class="contact-icon"><Icon name="telegram" /></span><span>Поддержка в Telegram</span></a></li>
       </ul>
     </div>
-    {shareUrl && (
-      <details class="footer-disclosure"><summary>Поделиться лаунчером</summary><div class="foot-share" aria-labelledby="share-title">
-        <div>
-          <h2 id="share-title">Поделиться лаунчером</h2>
-          <p>Отправь ссылку другу — пусть тоже обустроит свой Minecraft.</p>
-          <a class="share-address" id="share-site-url" href={shareUrl}>{shareUrl}</a>
-        </div>
-        <div class="share-actions">
-          <button class="btn btn-soft" type="button" data-copy="share-site-url" aria-label="Скопировать ссылку на сайт"><Icon name="copy" /><span aria-live="polite">Скопировать</span></button>
-          <a class="btn btn-soft" href={telegramShare.href} target="_blank" rel="noopener noreferrer"><Icon name="telegram" />Отправить в Telegram</a>
-        </div>
-      </div></details>
-    )}
     <details class="footer-disclosure"><summary>Поддержать проект</summary><section class="foot-support" id="support" aria-labelledby="support-title">
       <div>
         <h2 id="support-title">Поддержать проект</h2>

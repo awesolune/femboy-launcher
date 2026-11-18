@@ -57,6 +57,19 @@ function syncThemeControls() {
   });
   document.querySelectorAll('[data-set-theme]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.setTheme === t)));
 }
+// Скрытый вариант снимка ленивый и без подготовки начинает грузиться только после смены темы — рамка на миг пустая.
+// По намерению (наведение, фокус, нажатие на переключатель) заранее грузим другой вариант только для снимков рядом с экраном.
+function warmOtherTheme() {
+  const hidden = root.dataset.theme === 'midnight' ? '.shot-light, .theme-img-sakura' : '.shot-dark, .theme-img-midnight';
+  const h = window.innerHeight;
+  document.querySelectorAll(hidden).forEach((img) => {
+    const r = img.parentElement.getBoundingClientRect();
+    if (img.loading === 'lazy' && r.bottom > 0 && r.top < 1.5 * h) img.loading = 'eager';
+  });
+}
+document.querySelectorAll('[data-theme-toggle], [data-set-theme]').forEach((b) =>
+  ['pointerenter', 'focus', 'pointerdown'].forEach((ev) => b.addEventListener(ev, warmOtherTheme, { passive: true })),
+);
 document.querySelectorAll('[data-theme-toggle]').forEach((b) =>
   b.addEventListener('click', () => setTheme(root.dataset.theme === 'midnight' ? 'sakura' : 'midnight')),
 );
@@ -103,29 +116,18 @@ if (dlg && typeof dlg.showModal === 'function') {
   const img = dlg.querySelector('#lb-img');
   const cap = dlg.querySelector('#lb-caption');
   const count = dlg.querySelector('#lb-count');
-  const brightness = dlg.querySelector('[data-lb-brightness]');
   let items = [];
   let index = 0;
 
   const show = (i) => {
     index = (i + items.length) % items.length;
     const t = items[index];
-    const dark = root.dataset.theme === 'midnight';
-    const softened = dark && !t.dataset.fullDark;
-    img.src = dark && t.dataset.fullDark ? t.dataset.fullDark : t.dataset.full;
-    img.classList.toggle('shot-softened', softened);
-    if (brightness) { brightness.hidden = !softened; brightness.setAttribute('aria-pressed', 'false'); }
+    img.src = root.dataset.theme === 'midnight' && t.dataset.fullDark ? t.dataset.fullDark : t.dataset.full;
     img.alt = t.dataset.alt || t.dataset.caption || '';
     cap.textContent = t.dataset.caption || '';
     count.textContent = items.length > 1 ? `${index + 1} ${en ? 'of' : 'из'} ${items.length}` : '';
     dlg.querySelectorAll('[data-lb-prev], [data-lb-next]').forEach((b) => (b.hidden = items.length < 2));
   };
-
-  brightness?.addEventListener('click', () => {
-    const original = brightness.getAttribute('aria-pressed') !== 'true';
-    brightness.setAttribute('aria-pressed', String(original));
-    img.classList.toggle('shot-softened', !original);
-  });
 
   document.querySelectorAll('[data-lb]').forEach((trigger) =>
     trigger.addEventListener('click', () => {

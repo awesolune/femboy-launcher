@@ -16,12 +16,13 @@ const all = import.meta.glob<{ default: ImageMetadata }>('../assets/screenshots/
 const src = all[`../assets/screenshots/${file}.png`]?.default;
 if (!src) throw new Error(`Нет скриншота src/assets/screenshots/${file}.png`);
 const full = await getImage({ src, width: 2000, format: 'webp', quality: 82 });
+// Тёмная пара — настоящий снимок того же экрана в теме лаунчера «Полночь»: <file>-midnight.png (у главного экрана — 04).
 const darkFiles: Record<string,string> = { '01-instances-light':'02-instances-dark', '03-instances-sakura':'04-instances-midnight' };
-const dark = darkFiles[file] ? all[`../assets/screenshots/${darkFiles[file]}.png`]?.default : null;
+const dark = all[`../assets/screenshots/${darkFiles[file] ?? file + '-midnight'}.png`]?.default ?? null;
 const darkFull = dark ? await getImage({ src:dark, width:2000, format:'webp', quality:82 }) : null;
 ---
 
-<button class="shot-btn" type="button" data-lb={group} data-full={full.src} data-full-dark={darkFull?.src} data-has-dark={dark ? 'true' : undefined} data-caption={caption} data-alt={alt} aria-label={`Открыть крупно: ${caption}`}>
+<button class="shot-btn" type="button" data-lb={group} data-full={full.src} data-full-dark={darkFull?.src} data-caption={caption} data-alt={alt} aria-label={`Открыть крупно: ${caption}`}>
   <span class="frame">
     <Image class={dark ? 'shot-light' : undefined} src={src} widths={[400, 640, 960, 1280]} sizes={sizes} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
     {dark && <Image class="shot-dark" src={dark} widths={[400, 640, 960, 1280]} sizes={sizes} alt={alt} loading="lazy" decoding="async" />}
