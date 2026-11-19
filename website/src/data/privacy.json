@@ -82,6 +82,15 @@
             "С вопросами, исправлением или запросом удаления данных, доступных проекту, обращайся к @FemboyLauncherSupportBot. Укажи, о каких данных идёт речь, без отправки секретов. Проект может удалить только находящиеся под его контролем данные; по данным независимого сервиса обращайся также к нему.",
             "Обновления этой политики публикуются по этому адресу с новой датой. Новые функции и способы обработки описываются отдельно; публикация страницы не означает изменение установленной у тебя версии."
           ]
+        ],
+        [
+          "advertising",
+          "Реклама и учёт показов на сайте",
+          [
+            "На русской странице скачивания размещено партнёрское предложение Яндекс Браузера. При переходе по ссылке запрос обрабатывают Яндекс и AppMetrica по собственным правилам. Параметры ссылки позволяют Яндексу учитывать партнёрские переходы и установки.",
+            "Для отчётности по рекламе сайт отправляет на собственный сервер случайный идентификатор события и идентификатор креатива, когда карточка впервые появляется в видимой области активной вкладки. Повторная прокрутка в пределах одной загрузки страницы не создаёт новый показ. Cookies и постоянный идентификатор посетителя для этого учёта не используются.",
+            "В базе счётчика сохраняются только случайный идентификатор события, идентификатор креатива и день по московскому времени. Код счётчика не сохраняет IP-адрес, User-Agent, аккаунты и поисковые запросы. Обычные журналы хостинга обрабатываются отдельно по правилам провайдера. Месячные итоги используются для рекламной отчётности; база и отчёты находятся вне публичной папки сайта."
+          ]
         ]
       ]
     },
@@ -166,6 +175,15 @@
             "To remove remaining local data, close the game and launcher, preserve worlds you need and check the actual path in Settings first. Deleting a profile folder also deletes instances, worlds and settings. The Windows uninstaller retains profile data. Cloud copies, trash, exports, backups and other programs must be handled separately; secure erasure is not guaranteed.",
             "For questions, corrections or deletion of data available to the project, contact @FemboyLauncherSupportBot. Identify the data concerned without sending secrets. The project can delete only data it controls; also contact independent providers about data they hold.",
             "Updates to this policy are published at this address with a new date. New features and processing changes are described separately; a website update does not change the version installed on your computer."
+          ]
+        ],
+        [
+          "advertising",
+          "Advertising and impression measurement",
+          [
+            "The Russian download page contains a Yandex Browser partner offer. Following its link sends a request to Yandex and AppMetrica under their own policies. Link parameters let Yandex attribute partner referrals and installations.",
+            "For advertising reports, the website sends a random event identifier and the creative identifier to its own server when the card first enters the visible area of an active tab. Scrolling back to the same card during one page load does not add another impression. This measurement uses no cookies or persistent visitor identifier.",
+            "The counter database stores only the random event identifier, creative identifier and date in Moscow time. The counter code does not store IP addresses, User-Agent, accounts or search queries. Ordinary hosting logs are handled separately under the hosting provider’s policies. Monthly totals are used for advertising reports; the database and reports are kept outside the public website directory."
           ]
         ]
       ]

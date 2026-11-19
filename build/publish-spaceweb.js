@@ -41,7 +41,9 @@ function plan(project, { preview = true, out = 'website/dist', previewHost } = {
       const stat = fs.lstatSync(full);
       if (stat.isSymbolicLink() || entry.name.startsWith('.') || /[\x00-\x1f\\]/.test(name)) throw new Error('Unsafe website entry');
       if (stat.isDirectory()) { walk(full, name + '/'); continue; }
-      if (!stat.isFile() || !allowed.has(path.extname(name).toLowerCase()) || /(?:^|\/)(?:package(?:-lock)?\.json|firebase\.json|credentials[^/]*|[^/]*-key\.xml)$/i.test(name) || entry.name.startsWith('.')) throw new Error('Non-public file in website output');
+      const endpointSource = path.join(project, 'website/public/ad-impression.php');
+      const vettedEndpoint = name === 'ad-impression.php' && fs.existsSync(endpointSource) && fs.readFileSync(endpointSource).equals(fs.readFileSync(full));
+      if (!stat.isFile() || (!allowed.has(path.extname(name).toLowerCase()) && !vettedEndpoint) || /(?:^|\/)(?:package(?:-lock)?\.json|firebase\.json|credentials[^/]*|[^/]*-key\.xml)$/i.test(name) || entry.name.startsWith('.')) throw new Error('Non-public file in website output');
       bytes += stat.size;
       if (stat.size > 32 * 1024 * 1024 || bytes > 64 * 1024 * 1024 || files.length >= 1000) throw new Error('Website output exceeds deployment safety limits');
       let body = fs.readFileSync(full);

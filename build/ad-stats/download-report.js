@@ -1,0 +1,6 @@
+'use strict';
+const fs=require('fs'),path=require('path');
+const {connection}=require('../publish-spaceweb.js');
+const month=process.argv[2],out=process.argv[3];
+if(!/^20\d{2}-(0[1-9]|1[0-2])$/.test(month||'')||!out)throw Error('Supply YYYY-MM and a local output directory');
+(async()=>{const remote=connection({user:process.env.SW_FTP_USER,password:process.env.SW_FTP_PASSWORD});try{const report=JSON.parse((await remote.get('/.fl-ad-stats/'+month+'.json',1024*1024)).toString());const csv=await remote.get('/.fl-ad-stats/'+month+'.csv',16384);if(report.month!==month||report.erid!=='MvGzQC9JbZnS6fV7CXrHCtaz'||report.timezone!=='Europe/Moscow'||!Number.isSafeInteger(report.total)||report.total<0||!Array.isArray(report.days)||report.days.reduce((n,d)=>n+Number(d.impressions),0)!==report.total||!csv.toString().includes(report.erid+','+report.total))throw Error('Report validation failed');fs.mkdirSync(out,{recursive:true});fs.writeFileSync(path.join(out,month+'.csv'),csv);fs.writeFileSync(path.join(out,month+'.json'),JSON.stringify(report,null,2));console.log('Verified report saved: '+month+', impressions: '+report.total);}finally{remote.close();}})().catch(()=>{console.error('Report unavailable or invalid. Do not substitute zero.');process.exitCode=1;});

@@ -4,5 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageIntro from '../components/PageIntro.astro';
 import Download from '../components/Download.astro';
+import YandexBrowserAd from '../components/YandexBrowserAd.astro';
+const english = Astro.url.pathname.startsWith(import.meta.env.BASE_URL.replace(/\/?$/, '/') + 'en/');
 ---
-<Base title="Скачать — Femboy Launcher" description="Скачать Femboy Launcher для Windows: установщик или Portable, контрольные суммы и сведения о подписи."><Header/><main id="main" class="inner-page download-page"><Download standalone/></main><Footer/><script src="../scripts/site.js"></script></Base>
+<Base title="Скачать — Femboy Launcher" description="Скачать Femboy Launcher для Windows: установщик или Portable, контрольные суммы и сведения о подписи."><Header/><main id="main" class="inner-page download-page"><Download standalone/>{!english && <YandexBrowserAd/>}</main><Footer/><script src="../scripts/site.js"></script></Base>

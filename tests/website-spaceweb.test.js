@@ -187,3 +187,18 @@ test('SpaceWeb rejects wrong download metadata, wrong new-page language and noin
   fs.writeFileSync(translated, original.replace('lang="ru"', 'lang="en"').replace('<head>', '<head><meta name="robots" content="noindex">'));
   assert.throws(() => plan(f.root, { preview: false, previewHost: 'site.fixture.test' }), /Production page/);
 });
+
+
+test('only the reviewed ad collector PHP is allowed and must match its source', t => {
+  const {root,out}=fixture(t);
+  const source=path.join(root,'website/public');fs.mkdirSync(source,{recursive:true});
+  const body=Buffer.from('<?php http_response_code(204);');
+  fs.writeFileSync(path.join(source,'ad-impression.php'),body);
+  fs.writeFileSync(path.join(out,'ad-impression.php'),body);
+  assert.ok(plan(root).files.some(f=>f.name==='ad-impression.php'));
+  fs.writeFileSync(path.join(out,'other.php'),body);
+  assert.throws(()=>plan(root),/Non-public/);
+  fs.unlinkSync(path.join(out,'other.php'));
+  fs.writeFileSync(path.join(out,'ad-impression.php'),'<?php echo "changed";');
+  assert.throws(()=>plan(root),/Non-public/);
+});
