@@ -461,6 +461,44 @@ const DIALOGS = [
 // Остальное: функции без окон. Результат должен быть «истинным» (не false, не null, не ошибка)
 function extra(version) {
   return [
+    // Общий механизм окон (app/modals.js): фокус внутри, Tab/Shift+Tab по кругу, фон inert, Esc и возврат фокуса,
+    // замена окна следующим, закрытие до конца асинхронной загрузки. Окна открывает временная кнопка внутри main
+    [
+      'окна: фокус внутри, Tab по кругу, фон недоступен, Esc и возврат фокуса',
+      `const bad = [];
+        const box = document.querySelector('#modalBox'), m = document.querySelector('#modal'), opener = document.createElement('button');
+        opener.textContent = 'кнопка-открывашка'; document.querySelector('main').append(opener);
+        try {
+        const key = (k, shift = false) => document.dispatchEvent(new KeyboardEvent('keydown', { key: k, shiftKey: shift, bubbles: true, cancelable: true }));
+        const items = () => [...box.querySelectorAll('a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])')].filter((e) => !e.disabled && !e.closest('[inert], [hidden]') && e.getClientRects().length);
+        const opens = [['создание сборки', () => openInstanceModal()], ['удаление', () => confirmDelete(${INST})], ['корзина', () => openTrash()], ['перенос', () => openMigrate((${INST}).id)], ['оптимизация', () => openOptimize((${INST}).id)]];
+        for (const [name, open] of opens) {
+          opener.focus();
+          open(); await s(700);
+          if (!m.classList.contains('open')) { bad.push(name + ': не открылось'); continue; }
+          if (!box.contains(document.activeElement)) bad.push(name + ': фокус не внутри');
+          if (box.getAttribute('role') !== 'dialog' || box.getAttribute('aria-modal') !== 'true') bad.push(name + ': нет role/aria-modal');
+          if (!opener.closest('[inert]')) bad.push(name + ': фон не inert');
+          opener.focus(); if (document.activeElement === opener) bad.push(name + ': фон получает фокус');
+          const list = items();
+          if (list.length > 1) {
+            list[list.length - 1].focus(); key('Tab'); if (document.activeElement !== list[0]) bad.push(name + ': Tab с последнего не на первый');
+            list[0].focus(); key('Tab', true); if (document.activeElement !== list[list.length - 1]) bad.push(name + ': Shift+Tab с первого не на последний');
+          }
+          key('Escape'); await s(300);
+          if (m.classList.contains('open')) bad.push(name + ': Esc не закрыл');
+          if (document.activeElement !== opener) bad.push(name + ': фокус не вернулся');
+          if (document.querySelector('[inert]')) bad.push(name + ': inert остался');
+        }
+        // цепочка: второе окно заменяет первое, фокус возвращается на кнопку, с которой открыли первое
+        opener.focus(); confirmDelete(${INST}); await s(300); openTrash(); await s(500); closeModal(); await s(300);
+        if (document.activeElement !== opener) bad.push('цепочка окон: фокус не вернулся');
+        // закрытие, пока окно ещё грузит данные: после загрузки ничего не всплывает, фон доступен
+        opener.focus(); openMigrate((${INST}).id); closeModal(); await s(2500);
+        if (m.classList.contains('open') || document.querySelector('[inert]') || document.activeElement !== opener) bad.push('закрытие во время загрузки');
+        } finally { opener.remove(); }
+        return bad.length ? 'EXC ' + bad.join('; ') : true`,
+    ],
     ['плашка обновления «готово»', `update = { state: 'ready', version: '9.9.9', current: '${version}' }; renderUpdate(); const p = document.querySelector('#updatePill'); const r = { hidden: p.hidden, text: p.textContent }; update = {}; renderUpdate(); return r`],
     // Заметки о новой версии (из latest.yml): первый щелчок по плашке показывает «Что нового», а обновляет второй или кнопка в окне; без заметок — сразу, как раньше
     [
@@ -1715,3 +1753,14 @@ function extra(version) {
 }
 
 module.exports = { DIALOGS, extra, COLLECTION, COLLECTION_TABLE, COLLECTION_VERSIONS }; // последние три — ещё и для скриптов со снимками окна
+
+// Review regression: negative tabindex, hidden controls and previous inert state.
+const reviewedExtra = module.exports.extra;
+module.exports.extra = (...args) => [...reviewedExtra(...args), ['Фокус: исключения Tab и восстановление inert', `const background = document.createElement('section'); background.inert = true; document.body.append(background);
+try {
+  openModal('<h2>Review</h2><button id="reviewFirst">First</button><button id="reviewNegative" tabindex="-1">Skip</button><button id="reviewHidden" style="visibility:hidden">Hidden</button><fieldset disabled><button id="reviewDisabled">Disabled</button></fieldset><button id="reviewLast">Last</button>');
+  const ids = modalFocusables(document.querySelector('#modalBox')).map(el=>el.id);
+  const expected = ids.join(',') === 'reviewFirst,reviewLast';
+  closeModal(); await s(250);
+  return expected && background.inert;
+} finally { background.remove(); document.querySelector('#modalBox').isDirty=null; closeModal(); }`]];

@@ -1,29 +1,15 @@
-- ☁️ **Новый формат облака** — синхронизация учитывает удаления, переименования и конфликтующие изменения; разные версии мира сохраняются отдельно. При неполной передаче файлов лаунчер ждёт завершения синхронизации облачного клиента
-- ⚠️ **Перед переходом облака** — сделай отдельную копию важных миров, закрой игру и дождись завершения облачного клиента на всех компьютерах. Обнови лаунчер везде и начни переход на компьютере с самыми свежими данными: Настройки → Миры и облако → «Перевести облако на новый формат…». Для новой копии нужно дополнительное место примерно по размеру переносимых сборок; прежняя копия сохраняется
-- 🧭 **Если не всё переведено** — отмени переход и выполни его с компьютера, где есть недостающие изменения. «Перевести без них» оставляет эти изменения вне новой облачной копии. После перехода дождись завершения облачного клиента и синхронизируй остальные обновлённые компьютеры. Версия 0.10.2 и более старые не поддерживают новый формат
-- 🔎 **Проверка облака продолжается** — проверки на локальных моделях пройдены, но проверка с настоящим облачным клиентом на двух физических компьютерах ещё не завершена. Перед использованием нового формата сохрани отдельную резервную копию
-- 🛟 **Восстановление синхронизации** — при ошибке перед запуском игры показывается выбор: отменить запуск или играть без синхронизации. «Восстановить облако с этого компьютера…» позволяет явно заменить облачное состояние локальным; это действие для восстановления, а не для обычного ожидания загрузки
-- 📦 **Прерванное обновление модпака** — добавлены восстановление и проверки файлов перед откатом; незавершённое обновление не смешивается с новым переносом сборки
-- 🌍 **Восстановление миров** — добавлены проверки архивов и свободного места до записи, исправлена обработка ошибок восстановления и резервных копий
-- 🎮 **Игра после перезапуска лаунчера** — лаунчер распознаёт оставшуюся запущенной игру после своего сбоя или закрытия и не предлагает запустить ту же сборку второй раз
-- 🔒 **Приватность и сеть** — при установке и первом запуске Portable можно выбрать необязательные фоновые функции. Добавлен переключатель фоновых обновлений лаунчера; проверки модпаков учитывают выбор проверки модов. Обычный запуск и тихое обновление сохраняют прежние настройки
-- 🖼️ **Аккаунты без лишних загрузок** — пассивные аватары отображаются локально; загрузка скина и плащей Microsoft запускается по твоему действию
-- 🧩 **Проверки файлов** — усилены проверки имён файлов модов, импортируемых архивов и компонента офлайн-скинов; код сборки лучше обнаруживает повреждение при копировании
-- 💬 **Поддержка** — ссылка на @FemboyLauncherSupportBot теперь есть в Настройки → О лаунчере
-- 📄 **Состав сборки** — lazy-val заменён собственной реализацией; уведомления о лицензиях проверяются при упаковке
+- ⚙️ **Новая основа** — Electron обновлён с 33 до 45.3.4. Сборка остаётся без цифровой подписи
+- 🗂️ **Удаление файлов в Windows** — добавлен совместимый механизм удаления папок: ссылки-junction удаляются без обхода целевой папки, корректно обрабатываются файлы «только чтение» и ошибки доступа
+- ⌨️ **Модальные окна** — фокус переходит внутрь окна, Tab и Shift+Tab остаются в нём, после закрытия фокус возвращается. Скрытые и отключённые элементы пропускаются, прежнее состояние фона сохраняется
+- 🖼️ **Копирование итогов игры** — копирование картинки переведено на новый API Electron. Исправлен адрес резервного репозитория GitHub
+- ℹ️ **Границы проверки выпуска** — автоматические проверки и проверки интерфейса пройдены. Установка готовых EXE и обновление с 0.11.0 в отдельной Windows-среде в этом выпуске не проверялись
+- ☁️ **Облако** — проверка с настоящим облачным клиентом на двух физических ПК остаётся незавершённой. Перед использованием нового формата сохрани отдельную копию важных миров
 
 ---
 
-- ☁️ **New cloud format** — sync tracks deletions, renames and conflicting changes; different world versions are kept separately. When files are only partly transferred, the launcher waits for your cloud client to finish syncing
-- ⚠️ **Before migrating cloud data** — make a separate backup of important worlds, close the game and wait for the cloud client on every computer. Update the launcher everywhere and start on the computer with the latest data: Settings → Worlds and cloud → the cloud-format migration action. The new copy needs extra space approximately equal to the instances being migrated; the previous copy is preserved
-- 🧭 **If migration is incomplete** — cancel and migrate from the computer containing the missing changes. Continuing without them leaves those changes out of the new cloud copy. After migration, wait for the cloud client to finish, then sync your other updated computers. Version 0.10.2 and earlier do not support the new format
-- 🔎 **Cloud testing is ongoing** — local model tests have passed, but testing with a real cloud client on two physical computers is not complete. Keep a separate backup before using the new format
-- 🛟 **Sync recovery** — if sync fails before launch, choose to cancel or play without syncing. Restore cloud from this computer explicitly replaces cloud state with local data; it is a recovery action, not a way to wait for uploads
-- 📦 **Interrupted modpack updates** — recovery and file checks before rollback have been added; an unfinished update is kept separate from a new instance migration
-- 🌍 **World restoration** — archive and free-space checks run before writing; restoration and backup error handling has been improved
-- 🎮 **Games after a launcher restart** — the launcher recognises a game left running after a launcher crash or exit and prevents launching the same instance again
-- 🔒 **Privacy and networking** — optional background features can be chosen during installation or the first Portable launch. A background launcher-update switch has been added; modpack checks follow the mod-update preference. Normal launches and silent updates preserve existing settings
-- 🖼️ **Accounts without extra downloads** — passive avatars are displayed locally; Microsoft skin and cape downloads start when you request them
-- 🧩 **File checks** — checks for mod filenames, imported archives and the offline-skin component have been tightened; instance codes better detect copying damage
-- 💬 **Support** — a link to @FemboyLauncherSupportBot is now available under Settings → About
-- 📄 **Package contents** — lazy-val has been replaced with a project-owned implementation; license notices are checked during packaging
+- ⚙️ **Updated runtime** — Electron has been upgraded from 33 to 45.3.4. The build remains unsigned
+- 🗂️ **File removal on Windows** — a compatible directory-removal implementation removes junction links without traversing their targets, handles read-only files and preserves access errors
+- ⌨️ **Modal dialogs** — focus moves into dialogs, Tab and Shift+Tab stay inside, and focus returns on close. Hidden and disabled controls are skipped and the background’s previous state is preserved
+- 🖼️ **Copying game recaps** — image copying uses the new Electron API. The GitHub backup repository address has been corrected
+- ℹ️ **Release validation limits** — automated and interface checks passed. Installing the packaged EXEs and upgrading from 0.11.0 in a separate Windows environment were not tested for this release
+- ☁️ **Cloud sync** — testing with a real cloud client on two physical PCs is still incomplete. Keep a separate backup of important worlds before using the new format

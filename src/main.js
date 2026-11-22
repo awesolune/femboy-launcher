@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain, shell, nativeTheme, dialog, Tray, Menu, nativeImage, powerMonitor, session, screen } = require('electron');
 const fs = require('fs');
+require('./core/rmsync-compat'); // до всех модулей: в Electron 45 на Windows родной рекурсивный fs.rmSync заходит в junction
 const path = require('path');
 const { pathToFileURL } = require('url');
 const store = require('./core/store');
@@ -1321,10 +1322,12 @@ handle('app:saveImage', async (data, opts) => {
   if (file) shell.showItemInFolder(file);
   return file;
 });
-handle('app:copyImage', (data) => {
+handle('app:copyImage', async (data) => {
   const img = nativeImage.createFromBuffer(imagesave.decodePng(data));
   if (img.isEmpty()) throw new Error('Не удалось скопировать картинку');
-  require('electron').clipboard.writeImage(img);
+  // Electron 44+: clipboard.writeImage убран, запись — через ClipboardItem и возвращает Promise
+  const { clipboard, ClipboardItem } = require('electron');
+  await clipboard.write([new ClipboardItem({ 'image/png': new Blob([img.toPNG()], { type: 'image/png' }) })]);
 });
 // Лог игры сборки («Ещё» → «Лог игры» и «Папка логов»): what — 'latest' или 'folder', что именно открыть, решает core/gamelog.js
 handle('instances:openLog', async (id, what) => {

@@ -1033,6 +1033,7 @@ body[data-page='instances'] .playbar { display: none; }
 @keyframes popIn { from { opacity: 0; transform: translateY(16px) scale(0.94); } }
 @keyframes popOut { to { opacity: 0; transform: translateY(8px) scale(0.97); } }
 .modal-box { width: min(540px, 92vw); max-height: 88vh; overflow-y: auto; padding: 24px; box-shadow: var(--shadow-lg); }
+.modal-box:focus { outline: none; } /* фокус на самом окне — только точка входа для Tab; у кнопок и полей кольцо остаётся */
 .modal-box h2 { font-size: 24px; margin-bottom: 16px; }
 .modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
 .icon-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }

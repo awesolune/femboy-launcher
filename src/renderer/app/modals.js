@@ -1,17 +1,51 @@
 // Модальные окна: каркас, создание и правка сборки, подтверждение удаления
 
 /* ---------- модалки ---------- */
+// Окно одно (#modal): следующее окно заменяет содержимое текущего. Пока оно открыто, фон недоступен (inert), Tab и Shift+Tab
+// ходят по кругу внутри, а после закрытия фокус возвращается на кнопку, с которой открыли первое окно цепочки.
 let modalCloseTimer = null;
+let modalOpener = null;
+const MODAL_FOCUSABLE = 'a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
+const modalFocusables = (box) =>
+  [...box.querySelectorAll(MODAL_FOCUSABLE)].filter((el) => !el.matches(':disabled') && (el.tabIndex >= 0 || (el.isContentEditable && !el.hasAttribute('tabindex'))) && !el.closest('[inert], [hidden]') && el.getClientRects().length && !['hidden', 'collapse'].includes(getComputedStyle(el).visibility));
+// Фон — все прочие корневые элементы, кроме уведомлений: в них бывают кнопки вроде «Вернуть»
+const modalBackgroundState = new Map();
+function setModalBackground(inert) {
+  if (!inert) {
+    for (const [el, previous] of modalBackgroundState) el.inert = previous;
+    modalBackgroundState.clear();
+    return;
+  }
+  for (const el of document.body.children) {
+    if (el.id === 'modal' || el.id === 'toasts' || el.tagName === 'SCRIPT') continue;
+    if (!modalBackgroundState.has(el)) modalBackgroundState.set(el, el.inert);
+    el.inert = true;
+  }
+}
+function focusModalStart(box) {
+  // Своё поле окно фокусирует само после openModal; иначе — элемент с autofocus или сам диалог (Tab идёт к первой кнопке)
+  (box.querySelector('[autofocus]') || box).focus({ preventScroll: true });
+}
 function openModal(html) {
   const m = $('#modal');
   const box = $('#modalBox');
+  const wasOpen = m.classList.contains('open') && !m.classList.contains('closing');
+  if (!wasOpen && !m.contains(document.activeElement)) modalOpener = document.activeElement;
   clearTimeout(modalCloseTimer); // окно сразу после закрытия другого: отложенное закрытие не должно спрятать новое
   m.classList.remove('closing');
   box.className = 'modal-box card';
   box.isDirty = box.dispose = null;
   box.innerHTML = html;
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.tabIndex = -1;
+  const title = box.querySelector('h2');
+  if (title) title.id ||= 'modalTitle';
+  title ? box.setAttribute('aria-labelledby', title.id) : box.removeAttribute('aria-labelledby');
   drawCats(box);
   m.classList.add('open');
+  setModalBackground(true);
+  focusModalStart(box);
   Sounds.play('open');
   return box;
 }
@@ -26,9 +60,29 @@ function closeModal() {
   Sounds.play('close');
   m.classList.add('closing');
   modalCloseTimer = setTimeout(() => m.classList.remove('open', 'closing'), 190);
+  setModalBackground(false);
+  const back = modalOpener;
+  modalOpener = null;
+  if (back?.isConnected && back !== document.body && !back.closest('[inert]')) back.focus({ preventScroll: true });
+  else if (m.contains(document.activeElement)) document.activeElement.blur();
 }
 $('#modal').addEventListener('mousedown', (e) => e.target.id === 'modal' && closeModal());
-document.addEventListener('keydown', (e) => e.key === 'Escape' && closeModal());
+document.addEventListener('keydown', (e) => {
+  const m = $('#modal');
+  if (!m.classList.contains('open') || m.classList.contains('closing')) return;
+  if (e.key === 'Escape') return closeModal();
+  if (e.key !== 'Tab') return;
+  const box = $('#modalBox');
+  const list = modalFocusables(box);
+  const active = document.activeElement;
+  if (!list.length) return (e.preventDefault(), box.focus());
+  const first = list[0];
+  const last = list[list.length - 1];
+  if (!box.contains(active) || (e.shiftKey && (active === first || active === box)) || (!e.shiftKey && active === last)) {
+    e.preventDefault();
+    (e.shiftKey ? last : first).focus();
+  }
+});
 
 async function fillVersionSelect(select, { snapshots = false, current } = {}) {
   try {
