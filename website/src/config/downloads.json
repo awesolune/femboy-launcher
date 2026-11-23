@@ -13,9 +13,9 @@
   },
   "storage": {
     "provider": "object-storage",
-    "label": "Яндекс.Диск",
-    "where": "на Яндекс.Диске",
-    "folderUrl": "https://disk.yandex.ru/d/lVJoM6m6kR5sxQ",
+    "label": "Google Диск",
+    "where": "на Google Диске",
+    "folderUrl": "https://drive.google.com/drive/folders/1Yqn1XF3UwwAPpA8mYy9-O9lKDVOGXJNX",
     "fileUrlTemplate": "https://downloads.femboylauncher.ru/{fileName}"
   },
   "files": {

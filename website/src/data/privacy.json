@@ -70,7 +70,7 @@
           [
             "femboylauncher.ru — статический сайт на SpaceWeb. В текущем коде сайта нет собственных форм регистрации, рекламных или аналитических счётчиков. Браузер сохраняет выбранную тему в localStorage под ключом fl-site-theme; удалить её можно очисткой данных сайта. Шрифты, изображения и видео размещены вместе с сайтом.",
             "Для выдачи страниц и файлов хостинг обрабатывает IP-адрес, время, адрес запроса, сведения о браузере и другие обычные параметры HTTP; они могут попадать в технические журналы для работы и защиты сайта. Сроки технического хранения зависят от настроек и правил хостинга; уточнить сведения или запросить удаление доступных проекту данных можно через поддержку. Здесь не обещается фиксированный срок удаления журналов провайдера.",
-            "Скачивание использует downloads.femboylauncher.ru на Yandex Object Storage; запасные ссылки ведут на Яндекс.Диск или GitHub. Соответствующий провайдер получает параметры соединения и файла. Ссылка на добровольную поддержку открывает ЮMoney: платёжные сведения обрабатывает платёжный сервис, а не форма сайта лаунчера. Переходы в Telegram, на сайты модов и другие внешние ресурсы регулируются их собственными политиками."
+            "Скачивание использует downloads.femboylauncher.ru на Yandex Object Storage; запасные ссылки ведут на Google Диск или GitHub. Старый канал Яндекс.Диска сохраняется для прежних клиентов. Соответствующий провайдер получает параметры соединения и файла. Ссылка на добровольную поддержку открывает ЮMoney: платёжные сведения обрабатывает платёжный сервис, а не форма сайта лаунчера. Переходы в Telegram, на сайты модов и другие внешние ресурсы регулируются их собственными политиками."
           ]
         ],
         [
@@ -164,7 +164,7 @@
           [
             "femboylauncher.ru is a static website hosted on SpaceWeb. Its current code includes no project-operated registration forms, advertising or analytics trackers. Your browser stores the selected theme in localStorage as fl-site-theme; clear site data to remove it. Fonts, images and video are hosted with the site.",
             "To serve pages and files, the host processes IP addresses, times, requested addresses, browser information and other ordinary HTTP parameters; technical logs may retain them to operate and protect the site. Technical retention depends on hosting settings and provider rules; contact support for details or to request deletion of data available to the project. No fixed provider-log deletion deadline is promised here.",
-            "Downloads use downloads.femboylauncher.ru on Yandex Object Storage; reserve links use Yandex Disk or GitHub. The relevant provider receives connection and file-request details. Voluntary donation links open YooMoney, which processes payment information rather than a launcher-site form. Telegram, mod sites and other external destinations follow their own policies."
+            "Downloads use downloads.femboylauncher.ru on Yandex Object Storage; reserve links use Google Drive or GitHub. The legacy Yandex Disk channel remains available to older clients. The relevant provider receives connection and file-request details. Voluntary donation links open YooMoney, which processes payment information rather than a launcher-site form. Telegram, mod sites and other external destinations follow their own policies."
           ]
         ],
         [

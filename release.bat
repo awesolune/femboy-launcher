@@ -1,6 +1,6 @@
 @echo off
-rem Tests, builds and publishes to Object Storage, then the legacy Yandex.Disk mirror.
-rem Before running: bump "version" in package.json; the Yandex.Disk app must be running and signed in.
+rem Tests, builds and publishes to Object Storage, then stages the Google Drive reserve.
+rem Before running: bump "version" in package.json; sign in to Google Drive for desktop.
 rem Last step: reserve copy on GitHub (needs a token saved with build\setup-github-token.ps1; skipped without it).
 cd /d "%~dp0"
 where npm >nul 2>nul
@@ -30,13 +30,17 @@ node build\release-build.js dist-release || (pause & exit /b 1)
 echo.
 rem Main source first: installers, public hash checks, then latest.yml. Stop on failure.
 powershell -NoProfile -ExecutionPolicy Bypass -File build\publish-s3.ps1 -Out dist-release || (pause & exit /b 1)
-rem Keep the legacy Yandex.Disk channel for old clients and fallback downloads.
-powershell -NoProfile -ExecutionPolicy Bypass -File build\publish-yandex.ps1 -Out dist-release || (pause & exit /b 1)
+rem Reserve failures must not block the already published main release, website or GitHub.
+node build\publish-google-drive.js dist-release || echo WARNING: Google Drive reserve was not staged. Check Drive for desktop and retry: node build/publish-google-drive.js dist-release
+rem Optional legacy feed for old clients; kept available, but no longer a required reserve.
+if "%FL_PUBLISH_LEGACY_YANDEX%"=="1" (
+  powershell -NoProfile -ExecutionPolicy Bypass -File build\publish-yandex.ps1 -Out dist-release || echo WARNING: Legacy Yandex Disk reserve failed.
+)
 echo.
 rem The release is live: installers of older versions are not needed in dist-release any more (the previous one stays in the archive folder on the Disk).
 rem This step runs only after a successful publish; a failure here is harmless and never stops anything
 node build\clean-dist.js dist-release || echo Old installers were not cleaned - not important.
-rem Build and deploy the website only AFTER both launcher uploads succeed.
+rem Build and deploy the website after the main upload; a reserve delay must not block it.
 if exist website\package.json (
   node build\website-release.js dist-release --build && call build\deploy-website.bat || echo WARNING: Launcher is published, but website update failed. Retry: node build/website-release.js dist-release --build ^&^& build\deploy-website.bat
 )

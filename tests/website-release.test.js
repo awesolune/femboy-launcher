@@ -120,24 +120,25 @@ test('release.bat на копии: ошибки тестов/публикаци�
   fs.writeFileSync(path.join(p.root, 'build/publish-s3.ps1'), 'param([string]$Out, [switch]$Check)\nif ($Check) { Add-Content -LiteralPath $env:FAKELOG -Value "s3-check"; exit ([int]$env:S3_CHECK_FAIL) }\nAdd-Content -LiteralPath $env:FAKELOG -Value "s3-publish"\nexit ([int]$env:S3_PUBLISH_FAIL)\n');
   fs.writeFileSync(path.join(p.root, 'build/publish-yandex.ps1'), 'param([string]$Out)\nAdd-Content -LiteralPath $env:FAKELOG -Value "publish"\nexit ([int]$env:PUBLISH_FAIL)\n');
   fs.writeFileSync(path.join(p.root, 'build/publish-github.ps1'), 'param([string]$Out)\nAdd-Content -LiteralPath $env:FAKELOG -Value "github"\nexit 0\n');
+  fs.writeFileSync(path.join(p.root, 'build/publish-google-drive.js'), 'require("fs").appendFileSync(process.env.FAKELOG,"google\\n");process.exit(Number(process.env.GOOGLE_FAIL));');
   fs.writeFileSync(path.join(p.root, 'build/clean-dist.js'), 'process.exit(0);');
   fs.writeFileSync(path.join(p.root, 'build/release-build.js'), 'require("fs").appendFileSync(process.env.FAKELOG,"build\\n");process.exit(0);');
   fs.writeFileSync(path.join(p.root, 'build/release-notes.js'), 'process.exit(0);');
   fs.writeFileSync(path.join(p.root, 'build/website-release.js'), 'require("fs").appendFileSync(process.env.FAKELOG,"website\\n");process.exit(Number(process.env.WEBSITE_FAIL));');
   const log = path.join(p.root, 'calls.log');
-  for (const [testFail, s3CheckFail, s3PublishFail, publishFail, websiteFail, deployFail, expected, status] of [
+  for (const [testFail, s3CheckFail, s3PublishFail, publishFail, websiteFail, deployFail, expected, status, googleFail = 0, legacy = '1'] of [
     [1, 0, 0, 0, 0, 0, ['tests'], 1],
     [0, 1, 0, 0, 0, 0, ['tests', 's3-check'], 1],
     [0, 0, 1, 0, 0, 0, ['tests', 's3-check', 'build', 's3-publish'], 1],
-    [0, 0, 0, 1, 0, 0, ['tests', 's3-check', 'build', 's3-publish', 'publish'], 1],
-    [0, 0, 0, 0, 0, 0, ['tests', 's3-check', 'build', 's3-publish', 'publish', 'website', 'deploy deploy --only hosting --project femboy-launcher --non-interactive', 'github'], 0],
-    [0, 0, 0, 0, 1, 0, ['tests', 's3-check', 'build', 's3-publish', 'publish', 'website', 'github'], 0],
-    [0, 0, 0, 0, 0, 1, ['tests', 's3-check', 'build', 's3-publish', 'publish', 'website', 'deploy deploy --only hosting --project femboy-launcher --non-interactive', 'github'], 0],
+    [0, 0, 0, 1, 0, 0, ['tests', 's3-check', 'build', 's3-publish', 'google', 'publish', 'website', 'deploy deploy --only hosting --project femboy-launcher --non-interactive', 'github'], 0],
+    [0, 0, 0, 0, 0, 0, ['tests', 's3-check', 'build', 's3-publish', 'google', 'publish', 'website', 'deploy deploy --only hosting --project femboy-launcher --non-interactive', 'github'], 0],
+    [0, 0, 0, 0, 1, 0, ['tests', 's3-check', 'build', 's3-publish', 'google', 'publish', 'website', 'github'], 0],
+    [0, 0, 0, 0, 0, 1, ['tests', 's3-check', 'build', 's3-publish', 'google', 'publish', 'website', 'deploy deploy --only hosting --project femboy-launcher --non-interactive', 'github'], 0],
   ]) {
     fs.rmSync(log, { force: true });
     const run = spawnSync(process.env.ComSpec || 'cmd.exe', ['/d', '/c', 'release.bat'], {
       cwd: p.root, encoding: 'utf8', input: '', timeout: 20000, windowsHide: true,
-      env: { ...process.env, PATH: fakebin + path.delimiter + process.env.PATH, GH_TOKEN: '', FAKELOG: log, TEST_FAIL: String(testFail), S3_CHECK_FAIL: String(s3CheckFail), S3_PUBLISH_FAIL: String(s3PublishFail), PUBLISH_FAIL: String(publishFail), WEBSITE_FAIL: String(websiteFail), DEPLOY_FAIL: String(deployFail), EXPECTED_WEBSITE: path.join(p.root, 'website') },
+      env: { ...process.env, PATH: fakebin + path.delimiter + process.env.PATH, GH_TOKEN: '', FL_PUBLISH_LEGACY_YANDEX: legacy, GOOGLE_FAIL: String(googleFail), FAKELOG: log, TEST_FAIL: String(testFail), S3_CHECK_FAIL: String(s3CheckFail), S3_PUBLISH_FAIL: String(s3PublishFail), PUBLISH_FAIL: String(publishFail), WEBSITE_FAIL: String(websiteFail), DEPLOY_FAIL: String(deployFail), EXPECTED_WEBSITE: path.join(p.root, 'website') },
     });
     assert.equal(run.status, status, run.stdout + run.stderr);
     assert.deepEqual(fs.readFileSync(log, 'utf8').trim().split(/\r?\n/), expected);
