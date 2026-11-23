@@ -1,5 +1,73 @@
 [
   {
+    "version": "0.11.1",
+    "date": "2026-11-22",
+    "items": [
+      {
+        "icon": "⚙️",
+        "title": "Новая основа",
+        "text": "Electron обновлён с 33 до 45.3.4. Сборка остаётся без цифровой подписи"
+      },
+      {
+        "icon": "🗂️",
+        "title": "Удаление файлов в Windows",
+        "text": "добавлен совместимый механизм удаления папок: ссылки-junction удаляются без обхода целевой папки, корректно обрабатываются файлы «только чтение» и ошибки доступа"
+      },
+      {
+        "icon": "⌨️",
+        "title": "Модальные окна",
+        "text": "фокус переходит внутрь окна, Tab и Shift+Tab остаются в нём, после закрытия фокус возвращается. Скрытые и отключённые элементы пропускаются, прежнее состояние фона сохраняется"
+      },
+      {
+        "icon": "🖼️",
+        "title": "Копирование итогов игры",
+        "text": "копирование картинки переведено на новый API Electron. Исправлен адрес резервного репозитория GitHub"
+      },
+      {
+        "icon": "ℹ️",
+        "title": "Границы проверки выпуска",
+        "text": "автоматические проверки и проверки интерфейса пройдены. Установка готовых EXE и обновление с 0.11.0 в отдельной Windows-среде в этом выпуске не проверялись"
+      },
+      {
+        "icon": "☁️",
+        "title": "Облако",
+        "text": "проверка с настоящим облачным клиентом на двух физических ПК остаётся незавершённой. Перед использованием нового формата сохрани отдельную копию важных миров"
+      }
+    ],
+    "itemsEn": [
+      {
+        "icon": "⚙️",
+        "title": "Updated runtime",
+        "text": "Electron has been upgraded from 33 to 45.3.4. The build remains unsigned"
+      },
+      {
+        "icon": "🗂️",
+        "title": "File removal on Windows",
+        "text": "a compatible directory-removal implementation removes junction links without traversing their targets, handles read-only files and preserves access errors"
+      },
+      {
+        "icon": "⌨️",
+        "title": "Modal dialogs",
+        "text": "focus moves into dialogs, Tab and Shift+Tab stay inside, and focus returns on close. Hidden and disabled controls are skipped and the background’s previous state is preserved"
+      },
+      {
+        "icon": "🖼️",
+        "title": "Copying game recaps",
+        "text": "image copying uses the new Electron API. The GitHub backup repository address has been corrected"
+      },
+      {
+        "icon": "ℹ️",
+        "title": "Release validation limits",
+        "text": "automated and interface checks passed. Installing the packaged EXEs and upgrading from 0.11.0 in a separate Windows environment were not tested for this release"
+      },
+      {
+        "icon": "☁️",
+        "title": "Cloud sync",
+        "text": "testing with a real cloud client on two physical PCs is still incomplete. Keep a separate backup of important worlds before using the new format"
+      }
+    ]
+  },
+  {
     "version": "0.11.0",
     "date": "2026-11-15",
     "items": [
